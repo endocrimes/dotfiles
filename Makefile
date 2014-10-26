@@ -6,7 +6,7 @@ homebrew:
 	ruby -e '$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)'
 
 homebrew-packages:
-	brew install $(cat  Brewfile)
+	brew install '$(cat Brewfile)'
 
 ruby-packages:
 	gem install bundle
