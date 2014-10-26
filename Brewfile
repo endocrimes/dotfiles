@@ -1,30 +1,18 @@
-# Basic Setup
+zsh
+vim
+tree
+wget
+ffmpeg
 
-install zsh
-install vim
-install tree
-install wget
-install ffmpeg
+python
+python3
 
-# Python
+rbenv
 
-install python
-install python3
+ghc
+cabal-install
 
-# Ruby
+git
+hub
 
-install rbenv
-
-# Haskell
-
-install ghc
-install cabal-install
-
-# Git
-
-install git
-install hub
-
-# Deployment
-
-install heroku-toolbelt
+heroku-toolbelt
