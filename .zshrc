@@ -20,6 +20,7 @@ fi
 
 alias zshconfig="edit ~/.zshrc"
 alias ohmyzsh="edit ~/.oh-my-zsh"
+alias homegit="git --work-tree=$HOME --git-dir=$HOME/.files.git"
 
 alias showfiles="defaults write com.apple.finder AppleShowAllFiles true && killall Finder"
 alias hidefiles="defaults write com.apple.finder AppleShowAllFiles false && killall Finder"
