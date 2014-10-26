@@ -11,3 +11,4 @@ brew install cabal-install;
 brew install git;
 brew install hub;
 brew install heroku-toolbelt;
+brew install tmux;
