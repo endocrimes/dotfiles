@@ -71,6 +71,7 @@ NeoBundle "eraserhd/vim-ios"
 NeoBundle "msanders/cocoa.vim"
 NeoBundle "Rip-Rip/clang_complete"
 NeoBundle "b4winckler/vim-objc"
+NeoBundle "Keithbsmiley/swift.vim"
 
 "" Include user's extra bundle
 if filereadable(expand("~/.vimrc.local.bundles"))
