@@ -46,6 +46,4 @@ alias xcignore='curl -o .gitignore https://raw.githubusercontent.com/github/giti
 # This alias recursively destroys all .DS_Store files in the folder I am currently in
 alias DSNuke='find . -name .DS_Store -type f -delete'
 
-alias yubl='~/Development/Client/PreVox/YublIOS'
-
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
