@@ -98,5 +98,5 @@ api.bind('.', modifiers, function() { Window.bottomRight() });
 api.bind('F1', [], function() { Screen.setBrightness(Screen.getBrightness() - 6.25); });
 api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.25); });
 
-api.bind('y', ["ctrl", "alt"], function () { api.launch("iTerm"); });
+api.bind('y', ["shift", "cmd"], function () { api.launch("iTerm"); });
 api.bind('RETURN', ["shift", "cmd"], function () { api.launch("Messages"); })
