@@ -1,0 +1,7 @@
+[user]
+	name = Daniel Tomlinson
+	email = Dan@Tomlinson.io
+[core]
+	excludesfile = ~/.gitignore
+[mergetool]
+	keepBackup = false
