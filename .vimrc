@@ -406,3 +406,6 @@ let g:NERDTreeWinSize = 45
 
 "" Clang_Complete things
 let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
+
+"" Objective-C specific formatting
+autocmd Filetype objc setlocal expandtab ts=4 sts=4 sw=4

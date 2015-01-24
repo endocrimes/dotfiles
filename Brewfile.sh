@@ -12,3 +12,7 @@ brew install git;
 brew install hub;
 brew install heroku-toolbelt;
 brew install tmux;
+brew install class-dump;
+brew install npm;
+brew install node;
+
