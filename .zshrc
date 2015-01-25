@@ -4,9 +4,6 @@ ZSH_THEME="af-magic"
 CASE_SENSITIVE="false"
 COMPLETION_WAITING_DOTS="true"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 plugins=(git osx ruby vim rails)
 
 source $ZSH/oh-my-zsh.sh
