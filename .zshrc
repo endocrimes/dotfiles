@@ -30,6 +30,7 @@ alias edit_httpd='edit /etc/apache2/httpd.conf'
 alias edit_vhosts='edit /etc/apache2/extra/httpd-vhosts.conf'
 
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard'"
+alias killdock="killall Dock"
 
 ## Git Related
 alias gp='git push'
@@ -43,4 +44,4 @@ alias xcignore='curl -o .gitignore https://raw.githubusercontent.com/github/giti
 # This alias recursively destroys all .DS_Store files in the folder I am currently in
 alias DSNuke='find . -name .DS_Store -type f -delete'
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/.bin"
