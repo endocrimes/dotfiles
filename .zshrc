@@ -32,6 +32,9 @@ alias edit_vhosts='edit /etc/apache2/extra/httpd-vhosts.conf'
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard'"
 alias killdock="killall Dock"
 
+alias xcw="open *.xcworkspace"
+alias xcp="open *.xcodeproj"
+
 ## Git Related
 alias gp='git push'
 alias gs='git status'
