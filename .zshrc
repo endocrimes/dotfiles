@@ -1,6 +1,6 @@
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="af-magic"
+ZSH_THEME="subtract"
 CASE_SENSITIVE="false"
 COMPLETION_WAITING_DOTS="true"
 
@@ -35,6 +35,10 @@ alias killdock="killall Dock"
 alias xcw="open *.xcworkspace"
 alias xcp="open *.xcodeproj"
 
+export SCORPIUS="178.62.65.150"
+
+alias git_tunnel="ssh -Nl root -L 9000:54.148.244.16:443 $SCORPIUS"
+
 ## Git Related
 alias gp='git push'
 alias gs='git status'
@@ -48,3 +52,4 @@ alias xcignore='curl -o .gitignore https://raw.githubusercontent.com/github/giti
 alias DSNuke='find . -name .DS_Store -type f -delete'
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/.bin"
+
