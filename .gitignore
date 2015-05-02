@@ -13,6 +13,8 @@ Session.vim
 .Spotlight-V100
 .Trashes
 
+**/*history*
+
 # Xcode
 *.xcuserdatad
 *.xccheckout

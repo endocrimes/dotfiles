@@ -40,7 +40,7 @@
 	rma   = rebase master
 	rmi   = rebase master -i
 	rv    = remote -v
-	s     = status -sb
+	s     = status -b --porcelain
 	sub   = submodule update --init --recursive
 	subu  = submodule foreach git pull origin master
 	undo  = reset --soft HEAD^

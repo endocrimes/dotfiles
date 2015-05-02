@@ -132,7 +132,7 @@ set noswapfile
 set fileformats=unix,dos,mac
 set backspace=indent,eol,start
 set showcmd
-set shell=/bin/sh
+set shell=/usr/local/bin/zsh
 
 "*****************************************************************************
 "" Visual Settigns
