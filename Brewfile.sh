@@ -1,4 +1,5 @@
 brew install zsh;
+brew install fish;
 brew install vim;
 brew install tree;
 brew install wget;
