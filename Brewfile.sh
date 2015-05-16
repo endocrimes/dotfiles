@@ -30,3 +30,8 @@ brew cask install audio-hijack;
 brew cask install alfred;
 brew cask install airdisplay;
 brew cask install slack;
+brew cask install hopper-disassembler;
+brew cask install reveal;
+brew cask install arq;
+brew cask install charles;
+brew cask install tower;
