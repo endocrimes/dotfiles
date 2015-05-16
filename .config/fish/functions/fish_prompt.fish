@@ -1,4 +1,4 @@
 function fish_prompt
-	set_color 00FF00
+	set_color 0355EE
 	echo -n '$ '
 end

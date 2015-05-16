@@ -1,3 +1,7 @@
+#! /bin/bash
+brew install caskroom/cask/brew-cask;
+brew tap caskroom/fonts
+
 brew install zsh;
 brew install fish;
 brew install vim;
@@ -17,3 +21,12 @@ brew install class-dump;
 brew install npm;
 brew install node;
 
+brew cask install font-inconsolata;
+brew cask install font-droid-sans;
+brew cask install font-fontawesome;
+
+brew cask install iterm2;
+brew cask install audio-hijack;
+brew cask install alfred;
+brew cask install airdisplay;
+brew cask install slack;
