@@ -30,7 +30,8 @@
 	dtc   = difftool --cached
 	dtk   = difftool --tool=Kaleidoscope
 	dtkc  = difftool --tool=Kaleidoscope --cached
-	l     = log -5 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
+	l     = log -5 --topo-order --graph --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
+	lb    = !sh -c 'git log -`git rev-list --count HEAD ^$0` --topo-order --graph --date=relative --pretty=format:%Cgreen%h%Creset\\ %s%Cred%d%Creset\\ %C\\(yellow\\ bold\\)\\(%an\\)%Creset'
 	last  = diff HEAD^ HEAD
 	pul   = pull
 	punch = push --force
