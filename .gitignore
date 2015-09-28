@@ -15,6 +15,9 @@ Session.vim
 
 **/*history*
 
+# .config
+.config/robomongo
+
 # Xcode
 *.xcuserdatad
 *.xccheckout
