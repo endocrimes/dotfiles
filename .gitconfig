@@ -1,6 +1,7 @@
 [user]
 	name = Daniel Tomlinson
 	email = Dan@Tomlinson.io
+	signingkey = 3CE43CC7
 [core]
 	excludesfile = ~/.gitignore
 [mergetool]
