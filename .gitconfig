@@ -46,6 +46,7 @@
 	sub   = submodule update --init --recursive
 	subu  = submodule foreach git pull origin master
 	undo  = reset --soft HEAD^
+	current = rev-parse --abbrev-ref HEAD
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
