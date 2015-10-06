@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
+Plug 'keith/swift.vim'
 
 call plug#end()
 
