@@ -49,6 +49,7 @@ set scrolloff=3
 " Pretty Colours
 set background=dark
 colorscheme solarized
+call togglebg#map("<F5>")
 
 if has("gui_running")
   if has("gui_mac") || has("gui_macvim")
