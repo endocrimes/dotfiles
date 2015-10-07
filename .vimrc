@@ -6,6 +6,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
 Plug 'keith/swift.vim'
 Plug 'gfontenot/vim-xcodebuild'
+Plug 'kien/ctrlp.vim'
 
 call plug#end()
 
@@ -33,14 +34,14 @@ set mouse=a
 
 syntax enable
 set ruler
+
 set number
 
 set hlsearch   " Highlight all search matches
 set cursorline " Highlight current line
 
 " Enable line wrapping
-set wrap
-set textwidth=79
+set wrap linebreak nolist
 set colorcolumn=80
 
 " Disable the blinking cursor.
