@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+user=${1:-"danieltomlinson"}
+url=https://api.github.com/users/$user/repos?per_page=100
+
+curl $url | ruby -rjson -e 'JSON.load(STDIN.read).select { |repo| repo["fork"] == false }.each { |repo| puts "Cloning #{repo["name"]}"; %x[git clone #{repo["ssh_url"]} ]}'
