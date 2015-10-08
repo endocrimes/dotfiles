@@ -35,10 +35,18 @@ set mouse=a
 syntax enable
 set ruler
 
+" Line Numbering
 set number
 
-set hlsearch   " Highlight all search matches
-set cursorline " Highlight current line
+nnoremap <silent><leader>1 :set rnu! rnu? <cr>
+autocmd InsertEnter * silent! :set norelativenumber
+autocmd InsertLeave,BufNewFile,VimEnter * silent! :set relativenumber
+
+" Highlight all search matches
+set hlsearch
+
+" Highlight current line
+set cursorline 
 
 " Enable line wrapping
 set wrap linebreak nolist
