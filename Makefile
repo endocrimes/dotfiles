@@ -1,6 +1,6 @@
 all: ruby-packages
 
-osx: homebrew homebrew-packages xcode alcatraz
+osx: homebrew homebrew-packages xcode alcatraz airport
 
 homebrew:
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -20,3 +20,6 @@ xcode:
 
 alcatraz:
 	curl -fsSL https://raw.githubusercontent.com/supermarin/Alcatraz/master/Scripts/install.sh | sh
+
+airport:
+	sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
