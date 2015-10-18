@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+defaults read /Library/Preferences/SystemConfiguration/com.apple.airport.preferences | grep LastConnected -A 7
+
