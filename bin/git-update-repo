@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# Updates the current git repo by changing to the root branch, pulling the
+# latest changes, and then removes merged branches.
+
+remote=$1
+: ${remote:="origin"} # default remote is origin
+
+branch=$2
+: ${branch:="master"} # default root branch is master
+
+# Switch to branch
+git checkout "${branch}"
+
+# Pull the latest changes
+git pull "${remote}"
+
+# Cleanup Old Branches
+git branch --merged | grep -v "\*" | grep -v "${branch}" | grep -v master | grep -v develop | xargs -n 1 git branch -d
