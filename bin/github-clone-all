@@ -1,6 +1,25 @@
-#!/usr/bin/env sh
+#!/usr/bin/env ruby
+require 'json'
+require 'net/https'
 
-user=${1:-"danieltomlinson"}
-url=https://api.github.com/users/$user/repos?per_page=100
+user = ARGV[0]
+url = URI.parse("https://api.github.com/users/#{user}/repos?per_page=100")
 
-curl $url | ruby -rjson -e 'JSON.load(STDIN.read).select { |repo| repo["fork"] == false }.each { |repo| puts "Cloning #{repo["name"]}"; %x[git clone #{repo["ssh_url"]} ]}'
+if Dir.exist? user
+    raise RuntimeError, "Directory '#{user}' already exists"
+end
+
+puts "Creating directory: #{user}"
+Dir.mkdir user
+puts "Created directory: #{user}"
+
+Dir.chdir(user) do
+    res = Net::HTTP.get(url)
+
+    JSON.load(res).select { |repo| repo["fork"] == false }.each do |repo|
+        puts "Cloning #{repo["name"]}"
+        system "git clone #{repo["ssh_url"]}"
+    end
+end
+
+puts "Done"
