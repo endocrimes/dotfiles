@@ -1,6 +1,7 @@
 #! /bin/bash
 brew install caskroom/cask/brew-cask;
 brew tap caskroom/fonts
+brew tap danieltomlinson/formulae
 
 function install_brew() {
 	brew install $1	
@@ -28,6 +29,9 @@ install_brew tmux;
 install_brew class-dump;
 install_brew npm;
 install_brew node;
+
+install_brew danieltomlinson/git-cleanup
+install_brew danieltomlinson/git-promote
 
 install_cask font-inconsolata;
 install_cask font-droid-sans;
