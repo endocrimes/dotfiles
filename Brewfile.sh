@@ -30,8 +30,8 @@ install_brew class-dump;
 install_brew npm;
 install_brew node;
 
-install_brew danieltomlinson/git-cleanup
-install_brew danieltomlinson/git-promote
+install_brew danieltomlinson/formulae/git-cleanup
+install_brew danieltomlinson/formulae/git-promote
 
 install_cask font-inconsolata;
 install_cask font-droid-sans;

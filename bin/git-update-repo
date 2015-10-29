@@ -3,11 +3,9 @@
 # Updates the current git repo by changing to the root branch, pulling the
 # latest changes, and then removes merged branches.
 
-remote=$1
-: ${remote:="origin"} # default remote is origin
+remote=${1:-"origin"} # default remote is origin
 
-branch=$2
-: ${branch:="master"} # default root branch is master
+branch=${2:-"master"} # default root branch is master
 
 # Switch to branch
 git checkout "${branch}"
