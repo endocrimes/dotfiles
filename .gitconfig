@@ -1,64 +1,64 @@
 [user]
-	name = Daniel Tomlinson
-	email = Dan@Tomlinson.io
-	signingkey = 3CE43CC7
+    name = Daniel Tomlinson
+    email = Dan@Tomlinson.io
+    signingkey = 3CE43CC7
 [core]
-	excludesfile = ~/.gitignore
+    excludesfile = ~/.gitignore
 [mergetool]
-	keepBackup = false
-	prompt = false
+    keepBackup = false
+    prompt = false
 [merge "cocoapods"]
-	name = CocoaPods
-	driver = pod install
+    name = CocoaPods
+    driver = pod install
 [merge "bundler"]
-	name = bundler
-	driver = bundle
+    name = bundler
+    driver = bundle
 [alias]
-	a     = add
-	adeleted = !sh -c 'git rm `git ls-files --deleted`'
-	ap    = add -p
-	auntracked = !sh -c 'git add `git ls-files --others --exclude-standard`'
-	ba    = branch -a
-	c     = clone --recursive
-	cb    = !sh -c 'git checkout -b $1 && git push -u origin $1' -
-	co    = checkout
-	com   = commit --verbose
-	cop   = !sh -c 'git branch | cut -c 3- | selecta 2>/dev/null | xargs git checkout'
-	ctags = !.git/hooks/ctags
-	d     = diff
-	dc    = diff --cached
-	dt    = difftool
-	dtc   = difftool --cached
-	dtk   = difftool --tool=Kaleidoscope
-	dtkc  = difftool --tool=Kaleidoscope --cached
-	l     = log -5 --topo-order --graph --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
-	lb    = !sh -c 'git log -`git rev-list --count HEAD ^$0` --topo-order --graph --date=relative --pretty=format:%Cgreen%h%Creset\\ %s%Cred%d%Creset\\ %C\\(yellow\\ bold\\)\\(%an\\)%Creset'
-	last  = diff HEAD^ HEAD
+    a     = add
+    adeleted = !sh -c 'git rm `git ls-files --deleted`'
+    ap    = add -p
+    auntracked = !sh -c 'git add `git ls-files --others --exclude-standard`'
+    ba    = branch -a
+    c     = clone --recursive
+    cb    = !sh -c 'git checkout -b $1 && git push -u origin $1' -
+    co    = checkout
+    com   = commit --verbose
+    cop   = !sh -c 'git branch | cut -c 3- | selecta 2>/dev/null | xargs git checkout'
+    ctags = !.git/hooks/ctags
+    d     = diff
+    dc    = diff --cached
+    dt    = difftool
+    dtc   = difftool --cached
+    dtk   = difftool --tool=Kaleidoscope
+    dtkc  = difftool --tool=Kaleidoscope --cached
+    l     = log -5 --topo-order --graph --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
+    lb    = !sh -c 'git log -`git rev-list --count HEAD ^$0` --topo-order --graph --date=relative --pretty=format:%Cgreen%h%Creset\\ %s%Cred%d%Creset\\ %C\\(yellow\\ bold\\)\\(%an\\)%Creset'
+    last  = diff HEAD^ HEAD
     lastk = difftool --tool=Kaleidoscope HEAD^ HEAD
     pul   = pull
-	punch = push --force
-	r     = reflog -5
-	ra    = rebase --abort
-	rc    = rebase --continue
-	rma   = rebase master
-	rmi   = rebase master -i
-	rv    = remote -v
-	s     = status -b --porcelain
-	sub   = submodule update --init --recursive
-	subu  = submodule foreach git pull origin master
+    punch = push --force
+    r     = reflog -5
+    ra    = rebase --abort
+    rc    = rebase --continue
+    rma   = rebase master
+    rmi   = rebase master -i
+    rv    = remote -v
+    s     = status -b --porcelain
+    sub   = submodule update --init --recursive
+    subu  = submodule foreach git pull origin master
     undo  = reset --soft HEAD^
     fixup = commit --amend --no-edit
-	current = rev-parse --abbrev-ref HEAD
+    current = rev-parse --abbrev-ref HEAD
 [difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
+    cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+    trustExitCode = true
 [fetch]
-	prune = true
+    prune = true
 [branch]
-	autosetupmerge = true
+    autosetupmerge = true
 [rerere]
-	enabled = true
+    enabled = true
 [push]
-	default = simple
+    default = simple
