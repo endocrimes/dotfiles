@@ -7,6 +7,7 @@ set -U fish_user_paths ~/bin
 alias home="git --work-tree=$HOME --git-dir=$HOME/.files.git"
 alias xcp="open *.xcodeproj"
 alias xcw="open *.xcworkspace"
+alias xc="xcw; or xcp"
 alias gs="git s"
 alias ga="git add"
 alias gc="git commit"
