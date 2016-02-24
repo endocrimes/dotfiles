@@ -7,6 +7,8 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'keith/swift.vim'
 Plug 'gfontenot/vim-xcodebuild'
 Plug 'kien/ctrlp.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'rhysd/vim-clang-format'
 
 call plug#end()
 
@@ -16,8 +18,8 @@ call plug#end()
 :set backspace=indent,eol,start
 
 " Formatting
-set tabstop=4    " Use 4 spaces to a tab
-set shiftwidth=4 " As above
+set tabstop=2    " Use 4 spaces to a tab
+set shiftwidth=2 " As above
 set expandtab    " Expand tabs into spaces
 
 " Vmap for maintain Visual Mode after shifting > and <
