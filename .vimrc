@@ -7,6 +7,8 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'keith/swift.vim'
 Plug 'gfontenot/vim-xcodebuild'
 Plug 'kien/ctrlp.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'rhysd/vim-clang-format'
 
 call plug#end()
 
