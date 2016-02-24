@@ -2,7 +2,7 @@ set fish_greeting
 set -x EDITOR vim
 set -x LSCOLORS Gxfxcxdxbxegedabagacad
 
-set -U fish_user_paths ~/bin
+set -U fish_user_paths ~/bin /Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin
 
 alias home="git --work-tree=$HOME --git-dir=$HOME/.files.git"
 alias xcp="open *.xcodeproj"
