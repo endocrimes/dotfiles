@@ -1,14 +1,15 @@
 #! /bin/bash
 brew install caskroom/cask/brew-cask;
-brew tap caskroom/fonts
-brew tap danieltomlinson/formulae
+brew tap caskroom/fonts;
+brew tap danieltomlinson/formulae;
+brew tap kylef/formulae;
 
 function install_brew() {
-	brew install $1	
+	brew install $1;
 }
 
 function install_cask() {
-	brew cask install $1
+	brew cask install $1;
 }
 
 install_brew zsh;
@@ -30,8 +31,10 @@ install_brew class-dump;
 install_brew npm;
 install_brew node;
 
-install_brew danieltomlinson/formulae/git-cleanup
-install_brew danieltomlinson/formulae/git-promote
+install_brew kylef/formulae/swiftenv;
+
+install_brew danieltomlinson/formulae/git-cleanup;
+install_brew danieltomlinson/formulae/git-promote;
 
 install_cask font-inconsolata;
 install_cask font-droid-sans;
