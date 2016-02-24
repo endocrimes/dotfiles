@@ -16,9 +16,11 @@ call plug#end()
 :set backspace=indent,eol,start
 
 " Formatting
-set tabstop=4    " Use 4 spaces to a tab
-set shiftwidth=4 " As above
+set tabstop=2    " Use 2 spaces to a tab
+set shiftwidth=2 " As above
 set expandtab    " Expand tabs into spaces
+
+autocmd FileType swift set noexpandtab
 
 " Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
@@ -31,7 +33,6 @@ let mapleader=','
 set mouse=a
 
 "" Visual Settings
-
 syntax enable
 set ruler
 
@@ -86,6 +87,9 @@ noremap <Leader>v :<C-u>vsplit<CR>
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 nnoremap <silent> <S-t> :tabnew<CR>
+
+" Make
+nnoremap <Leader>m :make<CR>
 
 " NERDTree configuration
 let g:NERDTreeShowHidden=1
