@@ -21,3 +21,6 @@ Session.vim
 # Xcode
 *.xcuserdatad
 *.xccheckout
+
+# Bundler
+.bundle

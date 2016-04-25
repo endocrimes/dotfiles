@@ -1,6 +1,7 @@
 set fish_greeting
 set -x EDITOR vim
 set -x LSCOLORS Gxfxcxdxbxegedabagacad
+set -x GOPATH ~/.gopath
 
 set -U fish_user_paths ~/bin /Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin
 
@@ -27,3 +28,6 @@ end
 function ib
   git checkout -b dan-$argv
 end
+setenv SWIFTENV_ROOT "$HOME/.swiftenv"
+setenv PATH "$SWIFTENV_ROOT/bin" $PATH
+status --is-interactive; and . (swiftenv init -|psub)

@@ -2,7 +2,7 @@
 
 all: ruby-packages
 
-osx: homebrew homebrew-packages xcode swift alcatraz airport osx-config
+osx: homebrew homebrew-packages swift alcatraz airport osx-config
 
 homebrew:
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"

@@ -2,13 +2,26 @@
 
 call plug#begin('~/.vim/plugged')
 
+"" Shared
 Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
+Plug 'majutsushi/tagbar'
+
+" Autocomplete
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-endwise'
+Plug 'ervandew/supertab'
+
+"" Elixir
+Plug 'elixir-lang/vim-elixir'
+
+"" Obj-C / Swift
+Plug 'rhysd/vim-clang-format'
 Plug 'keith/swift.vim'
 Plug 'gfontenot/vim-xcodebuild'
-Plug 'kien/ctrlp.vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'rhysd/vim-clang-format'
+
+"" Ruby
+Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
 
@@ -79,7 +92,11 @@ cnoreabbrev Wq wq
 cnoreabbrev WQ wq
 
 " Autocomplete <3
-imap § <C-P>
+imap <Leader>` <C-P>
+
+" Tagbar
+let g:tagbar_ctags_bin='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
+nmap <Leader>2 :TagbarToggle<CR>
 
 " Split
 noremap <Leader>h :<C-u>split<CR>
