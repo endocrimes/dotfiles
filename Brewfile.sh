@@ -49,3 +49,7 @@ install_cask reveal;
 install_cask arq;
 install_cask charles;
 install_cask tower;
+install_cask conductor;
+install_cask google-chrome;
+install_cask quickradar;
+install_cask tripmode;
