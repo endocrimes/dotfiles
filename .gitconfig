@@ -1,18 +1,12 @@
 [user]
-    name = Daniel Tomlinson
-    email = Dan@Tomlinson.io
+    name = Danielle Tomlinson
+    email = dan@tomlinson.io
     signingkey = 3CE43CC7
 [core]
     excludesfile = ~/.gitignore
 [mergetool]
     keepBackup = false
     prompt = false
-[merge "cocoapods"]
-    name = CocoaPods
-    driver = pod install
-[merge "bundler"]
-    name = bundler
-    driver = bundle
 [alias]
     a     = add
     adeleted = !sh -c 'git rm `git ls-files --deleted`'
