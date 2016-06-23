@@ -25,6 +25,12 @@ alias gc="git commit"
 alias l="ls -lah"
 alias clean-branches="git branch --merged | grep -v '\*' | grep -v master | grep -v dev | xargs -n 1 git branch -d"
 
+## Bundle
+alias be="bundle exec"
+
+## CocoaPods
+alias csu="bundle exec rake spec:unit"
+
 ## Git Related
 alias xcignore='curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/Objective-C.gitignore'
 
@@ -38,3 +44,6 @@ eval "$(swiftenv init -)"
 
 ## Random Scripts
 export PATH="~/bin:$PATH"
+
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh

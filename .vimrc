@@ -35,7 +35,8 @@ set tabstop=2    " Use 2 spaces to a tab
 set shiftwidth=2 " As above
 set expandtab    " Expand tabs into spaces
 
-autocmd FileType swift set noexpandtab
+autocmd FileType swift set tabstop=4
+autocmd FileType swift set shiftwidth=4
 
 " Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
