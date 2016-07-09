@@ -121,3 +121,49 @@ noremap <Leader>3 :NERDTreeToggle<CR>
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
+
+"" Ruby
+
+" Find related specs
+function! s:RelatedSpec()
+  let l:fullpath = expand("%:p")
+  let l:filepath = expand("%:h")
+  let l:fname = expand("%:t")
+  
+  let l:source_dirs = [ 'app/', 'Sources/', 'src/', 'lib/cocoapods/', 'lib/cocoapods-core/' ]
+  let l:substitutions = [ [ ".rb$", "_spec.rb" ], [ ".rb$", "_test.rb" ], [ ".swift$", "Tests.swift" ], [ ".swift$", "Test.swift" ] ]
+
+  let l:clean_filepath = l:filepath
+  for source_dir in l:source_dirs
+    let l:clean_filepath = substitute(l:clean_filepath, source_dir, "", "")
+  endfor
+
+  let l:test_names = []
+  for substitution in l:substitutions
+    let l:substituted = substitute(l:fname, get(substitution, 0, ''), get(substitution, 1, ''), "")
+    call add(l:test_names, l:substituted)
+  endfor
+
+  let l:test_dirs = ["spec", "fast_spec", "test", "spec/unit", "Tests"]
+
+  for test_name in l:test_names
+    for test_dir in l:test_dirs
+      let l:spec_path = test_dir . "/" . l:clean_filepath . "/" . test_name
+      let l:full_spec_path = substitute(l:fullpath, l:filepath . "/" . l:fname, l:spec_path, "")
+      if filereadable(l:spec_path)
+        return l:full_spec_path
+      end
+    endfor
+  endfor
+endfunction
+
+function! s:RelatedSpecOpen()
+  let l:spec_path = s:RelatedSpec()
+  if filereadable(l:spec_path)
+    execute ":tabe " . l:spec_path
+  endif
+endfunction
+
+command! RelatedSpecPath call s:RelatedSpec()
+command! RelatedSpecOpen call s:RelatedSpecOpen()
+nnoremap <silent> <Leader>s :RelatedSpecOpen<CR>
