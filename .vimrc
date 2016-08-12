@@ -102,6 +102,7 @@ nmap <Leader>2 :TagbarToggle<CR>
 " Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
+set splitright
 
 " Tabs
 nnoremap <Tab> gt
@@ -130,7 +131,7 @@ function! s:RelatedSpec()
   let l:filepath = expand("%:h")
   let l:fname = expand("%:t")
   
-  let l:source_dirs = [ 'app/', 'Sources/', 'src/', 'lib/cocoapods/', 'lib/cocoapods-core/' ]
+  let l:source_dirs = [ 'app/', 'Sources/', 'src/', 'lib/cocoapods/', 'lib/cocoapods-core/', 'lib/xctestrunner']
   let l:substitutions = [ [ ".rb$", "_spec.rb" ], [ ".rb$", "_test.rb" ], [ ".swift$", "Tests.swift" ], [ ".swift$", "Test.swift" ] ]
 
   let l:clean_filepath = l:filepath
@@ -157,13 +158,22 @@ function! s:RelatedSpec()
   endfor
 endfunction
 
-function! s:RelatedSpecOpen()
+function! s:RelatedSpecOpenTab()
   let l:spec_path = s:RelatedSpec()
   if filereadable(l:spec_path)
     execute ":tabe " . l:spec_path
   endif
 endfunction
 
+function! s:RelatedSpecOpenSplit()
+  let l:spec_path = s:RelatedSpec()
+  if filereadable(l:spec_path)
+    execute ":vsp " . l:spec_path
+  endif
+endfunction
+
 command! RelatedSpecPath call s:RelatedSpec()
-command! RelatedSpecOpen call s:RelatedSpecOpen()
-nnoremap <silent> <Leader>s :RelatedSpecOpen<CR>
+command! RelatedSpecOpenTab call s:RelatedSpecOpenTab()
+command! RelatedSpecOpenSplit call s:RelatedSpecOpenSplit()
+nnoremap <silent> <Leader>s :RelatedSpecOpenTab<CR>
+nnoremap <silent> <Leader>S :RelatedSpecOpenSplit<CR>
