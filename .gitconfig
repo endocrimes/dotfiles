@@ -49,10 +49,12 @@
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
     trustExitCode = true
 [fetch]
-    prune = true
+    prune = false
 [branch]
     autosetupmerge = true
 [rerere]
     enabled = true
 [push]
     default = simple
+[commit]
+	gpgsign = true

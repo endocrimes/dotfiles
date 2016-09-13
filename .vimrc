@@ -5,12 +5,17 @@ call plug#begin('~/.vim/plugged')
 "" Shared
 Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
-Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
 
-" Autocomplete
+"" Autocomplete
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-endwise'
 Plug 'ervandew/supertab'
+
+"" Clojure
+Plug 'vim-scripts/VimClojure'
+Plug 'vim-scripts/paredit.vim'
 
 "" Elixir
 Plug 'elixir-lang/vim-elixir'
@@ -24,6 +29,9 @@ Plug 'gfontenot/vim-xcodebuild'
 Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
+
+"" Airline
+:set laststatus=2 " Required to work without splits.
 
 "" Basic
 
