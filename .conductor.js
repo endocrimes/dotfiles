@@ -95,7 +95,7 @@ api.bind('m', modifiers, function() { Window.bottomLeft() });
 api.bind(',', modifiers, function() { Window.topRight() });
 api.bind('.', modifiers, function() { Window.bottomRight() });
 
-api.bind('y', ["shift", "cmd"], function () { api.launch("iTerm"); });
+api.bind('y', ["shift", "cmd"], function () { api.launch("Terminal"/*"iTerm"*/); });
 api.bind('RETURN', ["shift", "cmd"], function () { api.launch("Messages"); })
 api.bind('t', ["shift", "cmd"], function () { api.launch("Tweetbot"); });
 api.bind('u', ["shift", "cmd"], function () { api.launch("Slack"); });

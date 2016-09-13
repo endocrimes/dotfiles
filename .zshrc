@@ -2,6 +2,16 @@ export ZSH=$HOME/.oh-my-zsh
 export EDITOR='vim'
 export GOPATH='.'
 
+# Machine specific configuration
+#
+
+if [ -f $HOME/.zsh.private ]; then
+  source $HOME/.zsh.private
+fi
+
+# History Support
+#
+
 HISTFILE=~/.zsh_history
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
@@ -19,7 +29,24 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
-export PROMPT='$ '
+# General
+#
+
+# Prompt
+
+function __git_prompt() {
+  local gitcurrent=`git current 2> /dev/null`
+  if [[ -n $gitcurrent ]]; then
+    echo "[$gitcurrent] "
+  fi
+}
+local git_prompt='$(__git_prompt)'
+
+setopt PROMPT_SUBST
+export PS1="$git_prompt$ "
+
+# Command Alias
+#
 
 alias showfiles="defaults write com.apple.finder AppleShowAllFiles true && killall Finder"
 alias hidefiles="defaults write com.apple.finder AppleShowAllFiles false && killall Finder"
@@ -61,6 +88,14 @@ eval "$(swiftenv init -)"
 
 ## Random Scripts
 export PATH="~/bin:$PATH"
+
+## GPG
+if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
+  source ~/.gnupg/.gpg-agent-info
+  export GPG_AGENT_INFO
+else
+  eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
+fi
 
 ## Ruby
 source /usr/local/opt/chruby/share/chruby/chruby.sh
