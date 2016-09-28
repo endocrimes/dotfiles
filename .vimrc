@@ -16,6 +16,7 @@ Plug 'ervandew/supertab'
 "" Clojure
 Plug 'vim-scripts/VimClojure'
 Plug 'vim-scripts/paredit.vim'
+Plug 'tpope/vim-fireplace'
 
 "" Elixir
 Plug 'elixir-lang/vim-elixir'
@@ -27,6 +28,9 @@ Plug 'gfontenot/vim-xcodebuild'
 
 "" Ruby
 Plug 'vim-ruby/vim-ruby'
+
+"" Prose
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
