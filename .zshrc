@@ -36,10 +36,10 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 function __git_prompt() {
   local gitcurrent=`git current 2> /dev/null`
   if [[ -n $gitcurrent ]]; then
-    echo "[$gitcurrent] "
+    echo "[$gitcurrent]:"
   fi
 }
-local git_prompt='$(__git_prompt)'
+local git_prompt='$(__git_prompt)$(basename `pwd`) '
 
 setopt PROMPT_SUBST
 export PS1="$git_prompt$ "
