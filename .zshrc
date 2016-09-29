@@ -1,4 +1,3 @@
-export ZSH=$HOME/.oh-my-zsh
 export EDITOR='vim'
 export GOPATH='.'
 
@@ -102,6 +101,8 @@ eval "$(swiftenv init -)"
 export PATH="~/bin:$PATH"
 
 ## GPG
+#
+
 if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
   source ~/.gnupg/.gpg-agent-info
   export GPG_AGENT_INFO
