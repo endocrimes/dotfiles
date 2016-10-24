@@ -78,6 +78,10 @@ alias gs="git status"
 #
 alias clean-branches="git branch --merged | grep -v '\*' | grep -v master | grep -v dev | xargs -n 1 git branch -d"
 
+function open_dirty_files() {
+  vim $(git status --porcelain | awk '{print $2}')
+}
+
 ## Docker
 
 ## I use docker-compose way more often than I use a decimal calculator.
