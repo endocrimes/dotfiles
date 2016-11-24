@@ -1,5 +1,5 @@
 export EDITOR='vim'
-export GOPATH='.'
+export GOPATH=~/Development/circle/go
 
 # Machine specific configuration
 #
@@ -36,10 +36,15 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 function __git_prompt() {
   local gitcurrent=`git current 2> /dev/null`
   if [[ -n $gitcurrent ]]; then
-    echo "[$gitcurrent]:"
+    echo "($gitcurrent)"
   fi
 }
-local git_prompt='$(__git_prompt)$(basename `pwd`) '
+
+function __host_prompt() {
+  echo "dani@$(hostname -s)"
+}
+
+local git_prompt='[$(__host_prompt) $(basename `pwd`)$(__git_prompt)] '
 
 setopt PROMPT_SUBST
 export PS1="$git_prompt$ "
@@ -70,7 +75,7 @@ alias xcw="open *.xcworkspace"
 
 ## Git
 
-alias gs="git status"
+alias gs="git status --ignore-submodules"
 
 ## Clean up all local branches that are fully merged.
 #
