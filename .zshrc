@@ -41,7 +41,7 @@ function __git_prompt() {
 }
 
 function __host_prompt() {
-  echo "dani@$(hostname -s)"
+  echo "$USER@$(hostname -s)"
 }
 
 local git_prompt='[$(__host_prompt) $(basename `pwd`)$(__git_prompt)] '
