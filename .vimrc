@@ -32,6 +32,9 @@ Plug 'vim-ruby/vim-ruby'
 "" Prose
 Plug 'junegunn/goyo.vim'
 
+"" Rust
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
 
 "" Airline
@@ -92,7 +95,7 @@ call togglebg#map("<F5>")
 
 if has("gui_running")
   if has("gui_mac") || has("gui_macvim")
-    set guifont=Inconsolata-dz:h14
+    set guifont=Fira\ Code\ Retina:h14
   endif
 endif
 
