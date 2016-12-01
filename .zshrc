@@ -40,14 +40,10 @@ function __git_prompt() {
   fi
 }
 
-function __host_prompt() {
-  echo "$USER@$(hostname -s)"
-}
-
-local git_prompt='[$(__host_prompt) $(basename `pwd`)$(__git_prompt)] '
+local __prompt='[$USER@$(hostname -s) $(basename `pwd`)$(__git_prompt)] $ '
 
 setopt PROMPT_SUBST
-export PS1="$git_prompt$ "
+export PS1="$__prompt"
 
 # Command Alias
 #
