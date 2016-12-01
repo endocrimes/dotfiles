@@ -106,6 +106,55 @@ export SWIFTENV_ROOT="$HOME/.swiftenv"
 export PATH="$SWIFTENV_ROOT/bin:$PATH"
 eval "$(swiftenv init -)"
 
+## Keyboard
+
+function __remove_file_if_present() {
+  if [ -f $1 ]; then
+    rm $1
+  fi
+}
+
+function __backup_file() {
+  BACKUP_PATH="$1.bkp"
+  __remove_file_if_present $BACKUP_PATH
+  cp $1 $BACKUP_PATH
+}
+
+function use-keyboard-config() {
+  KARIBINER_CONFIG_PATH="$HOME/.karabiner.d/configuration/karibiner.json"
+  CONFIGURATIONS_DIR="$HOME/.config/karabiner"
+
+  NEW_CONFIG_PATH="$CONFIGURATIONS_DIR/$1.json"
+
+  if [ ! -f $NEW_CONFIG_PATH ]; then
+    echo "No configuration exists at path: $NEW_CONFIG_PATH"
+    return
+  fi
+
+  echo "Switching to configuration: $NEW_CONFIG_PATH"
+
+  __backup_file $KARIBINER_CONFIG_PATH
+  rm $KARIBINER_CONFIG_PATH
+  cp $NEW_CONFIG_PATH $KARIBINER_CONFIG_PATH
+
+  echo "Done! - Your old config can be found at $KARIBINER_CONFIG_PATH.bkp"
+}
+
+function save-keyboard-config() {
+  KARIBINER_CONFIG_PATH="$HOME/.karabiner.d/configuration/karibiner.json"
+  CONFIGURATIONS_DIR="$HOME/.config/karabiner"
+  NEW_CONFIG_PATH="$CONFIGURATIONS_DIR/$1.json"
+  if [ -f $NEW_CONFIG_PATH ]; then
+    echo "Configuration already exists at path: $NEW_CONFIG_PATH. Making backup."
+    __backup_file $NEW_CONFIG_PATH
+    rm $NEW_CONFIG_PATH
+  fi
+
+  cp $KARIBINER_CONFIG_PATH $NEW_CONFIG_PATH
+
+  echo "Saved to: $NEW_CONFIG_PATH!"
+}
+
 ## Random Scripts
 export PATH="~/bin:$PATH"
 
