@@ -42,6 +42,9 @@ call plug#end()
 
 "" Basic
 
+" Integrate with system keyboard
+set clipboard=unnamed
+
 " Sensible Backspace Support
 :set backspace=indent,eol,start
 
