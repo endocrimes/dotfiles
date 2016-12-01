@@ -17,6 +17,7 @@ Session.vim
 
 # .config
 .config/robomongo
+.config/**/*.bkp
 
 # Xcode
 *.xcuserdatad
