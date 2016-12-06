@@ -115,10 +115,6 @@ cnoreabbrev WQ wq
 " Autocomplete <3
 imap <Leader>` <C-P>
 
-" Tagbar
-let g:tagbar_ctags_bin='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
-nmap <Leader>2 :TagbarToggle<CR>
-
 " Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
