@@ -7,6 +7,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-projectionist'
 
 "" Autocomplete
 Plug 'kien/ctrlp.vim'
@@ -28,6 +29,7 @@ Plug 'gfontenot/vim-xcodebuild'
 
 "" Ruby
 Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rake'
 
 "" Prose
 Plug 'junegunn/goyo.vim'
