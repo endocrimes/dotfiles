@@ -117,7 +117,7 @@ function __backup_file() {
 }
 
 function use-keyboard-config() {
-  KARIBINER_CONFIG_PATH="$HOME/.karabiner.d/configuration/karibiner.json"
+  KARIBINER_CONFIG_PATH="$HOME/.karabiner.d/configuration/karabiner.json"
   CONFIGURATIONS_DIR="$HOME/.config/karabiner"
 
   NEW_CONFIG_PATH="$CONFIGURATIONS_DIR/$1.json"
@@ -137,7 +137,7 @@ function use-keyboard-config() {
 }
 
 function save-keyboard-config() {
-  KARIBINER_CONFIG_PATH="$HOME/.karabiner.d/configuration/karibiner.json"
+  KARIBINER_CONFIG_PATH="$HOME/.karabiner.d/configuration/karabiner.json"
   CONFIGURATIONS_DIR="$HOME/.config/karabiner"
   NEW_CONFIG_PATH="$CONFIGURATIONS_DIR/$1.json"
   if [ -f $NEW_CONFIG_PATH ]; then
