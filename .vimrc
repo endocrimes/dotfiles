@@ -132,6 +132,9 @@ nnoremap <Leader>m :make<CR>
 let g:NERDTreeShowHidden=1
 noremap <Leader>3 :NERDTreeToggle<CR>
 
+" CtrlP configuration
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
 "" Other
 
 " Include user's local vim config
