@@ -30,6 +30,7 @@ install_brew tmux;
 install_brew class-dump;
 install_brew npm;
 install_brew node;
+install_brew shellcheck;
 
 install_brew kylef/formulae/swiftenv;
 
