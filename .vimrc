@@ -8,6 +8,9 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-projectionist'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'vim-syntastic/syntastic'
+Plug 'tpope/vim-commentary'
 
 "" Autocomplete
 Plug 'kien/ctrlp.vim'
@@ -15,15 +18,14 @@ Plug 'tpope/vim-endwise'
 Plug 'ervandew/supertab'
 
 "" Clojure
-Plug 'vim-scripts/VimClojure'
 Plug 'vim-scripts/paredit.vim'
 Plug 'tpope/vim-fireplace'
+Plug 'guns/vim-clojure-static'
 
 "" Elixir
 Plug 'elixir-lang/vim-elixir'
 
 "" Obj-C / Swift
-Plug 'rhysd/vim-clang-format'
 Plug 'keith/swift.vim'
 Plug 'gfontenot/vim-xcodebuild'
 
@@ -142,57 +144,33 @@ if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
 
-"" Ruby
+"" Clojure
+let g:clojure_align_subforms = 1
 
-" Find related specs
-function! s:RelatedSpec()
-  let l:fullpath = expand("%:p")
-  let l:filepath = expand("%:h")
-  let l:fname = expand("%:t")
-  
-  let l:source_dirs = [ 'app/', 'Sources/', 'src/', 'lib/cocoapods/', 'lib/cocoapods-core/', 'lib/xctestrunner']
-  let l:substitutions = [ [ ".rb$", "_spec.rb" ], [ ".rb$", "_test.rb" ], [ ".swift$", "Tests.swift" ], [ ".swift$", "Test.swift" ] ]
+" Make sure that .cljx files are recognised as Clojure.
+autocmd BufNewFile,BufRead *.cljx setlocal filetype=clojure
 
-  let l:clean_filepath = l:filepath
-  for source_dir in l:source_dirs
-    let l:clean_filepath = substitute(l:clean_filepath, source_dir, "", "")
-  endfor
+" Rainbow parens for Clojure
 
-  let l:test_names = []
-  for substitution in l:substitutions
-    let l:substituted = substitute(l:fname, get(substitution, 0, ''), get(substitution, 1, ''), "")
-    call add(l:test_names, l:substituted)
-  endfor
+" Remove Black Parens
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 15
+autocmd Filetype clojure RainbowParenthesesActivate
+autocmd Syntax clojure RainbowParenthesesLoadRound
 
-  let l:test_dirs = ["spec", "fast_spec", "test", "spec/unit", "Tests"]
-
-  for test_name in l:test_names
-    for test_dir in l:test_dirs
-      let l:spec_path = test_dir . "/" . l:clean_filepath . "/" . test_name
-      let l:full_spec_path = substitute(l:fullpath, l:filepath . "/" . l:fname, l:spec_path, "")
-      if filereadable(l:spec_path)
-        return l:full_spec_path
-      end
-    endfor
-  endfor
-endfunction
-
-function! s:RelatedSpecOpenTab()
-  let l:spec_path = s:RelatedSpec()
-  if filereadable(l:spec_path)
-    execute ":tabe " . l:spec_path
-  endif
-endfunction
-
-function! s:RelatedSpecOpenSplit()
-  let l:spec_path = s:RelatedSpec()
-  if filereadable(l:spec_path)
-    execute ":vsp " . l:spec_path
-  endif
-endfunction
-
-command! RelatedSpecPath call s:RelatedSpec()
-command! RelatedSpecOpenTab call s:RelatedSpecOpenTab()
-command! RelatedSpecOpenSplit call s:RelatedSpecOpenSplit()
-nnoremap <silent> <Leader>s :RelatedSpecOpenTab<CR>
-nnoremap <silent> <Leader>S :RelatedSpecOpenSplit<CR>
