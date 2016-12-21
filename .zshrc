@@ -8,6 +8,8 @@ if [ -f $HOME/.zsh.private ]; then
   source $HOME/.zsh.private
 fi
 
+plugins=(git ssh-agent)
+
 # History Support
 #
 
