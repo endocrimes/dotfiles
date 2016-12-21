@@ -4,11 +4,21 @@ all: ruby-packages
 
 osx: homebrew homebrew-packages swift alcatraz airport osx-config
 
+ubuntu: apt-packages ruby-versions
+
+apt-packages:
+	./Aptfile.sh
+
 homebrew:
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 homebrew-packages:
 	./Brewfile.sh
+
+ruby-versions:
+	ruby-install ruby-2.2.5
+	ruby-install ruby-2.1.0
+	ruby-install ruby-2.3.1
 
 ruby-packages:
 	sudo gem install bundle
