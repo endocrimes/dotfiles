@@ -102,6 +102,9 @@ export SWIFTENV_ROOT="$HOME/.swiftenv"
 export PATH="$SWIFTENV_ROOT/bin:$PATH"
 eval "$(swiftenv init -)"
 
+## ~/bin
+export PATH="$HOME/bin:$PATH"
+
 ## Keyboard
 
 function __remove_file_if_present() {
@@ -167,3 +170,6 @@ fi
 ## Ruby
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/opt/chruby/share/chruby/auto.sh
+
+export NVM_DIR="/Users/dan/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
