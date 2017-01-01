@@ -85,6 +85,9 @@ function open_dirty_files() {
   vim $(git status --porcelain | awk '{print $2}')
 }
 
+## Emacs
+alias ec="emacsclient -c -nw -t -a ''"
+
 ## Docker
 
 ## I use docker-compose way more often than I use a decimal calculator.
