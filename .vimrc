@@ -3,19 +3,32 @@
 call plug#begin('~/.vim/plugged')
 
 "" Shared
-Plug 'scrooloose/nerdtree'
-Plug 'altercation/vim-colors-solarized'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'tpope/vim-projectionist'
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-projectionist'
+
+"" File Management
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+
+"" Theming and UI tweaks
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'kien/rainbow_parentheses.vim'
+
+"" Git
+Plug 'tpope/vim-fugitive'
+
+"" GitHub
+Plug 'jaxbot/github-issues.vim'
+Plug 'keith/gist.vim'
 
 "" Autocomplete
-Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-endwise'
 Plug 'ervandew/supertab'
+
+"" Secrets!
+Plug 'jamessan/vim-gnupg'
 
 "" Clojure
 Plug 'vim-scripts/paredit.vim'
@@ -27,14 +40,10 @@ Plug 'elixir-lang/vim-elixir'
 
 "" Obj-C / Swift
 Plug 'keith/swift.vim'
-Plug 'gfontenot/vim-xcodebuild'
 
 "" Ruby
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rake'
-
-"" Prose
-Plug 'junegunn/goyo.vim'
 
 "" Rust
 Plug 'rust-lang/rust.vim'
@@ -77,6 +86,8 @@ set ruler
 " Line Numbering
 set number
 
+"" Automatically switch between relativenumber and regular numbering when
+"" going in and out of insert mode.
 nnoremap <silent><leader>1 :set rnu! rnu? <cr>
 autocmd InsertEnter * silent! :set norelativenumber
 autocmd InsertLeave,BufNewFile,VimEnter * silent! :set relativenumber
@@ -135,6 +146,7 @@ let g:NERDTreeShowHidden=1
 noremap <Leader>3 :NERDTreeToggle<CR>
 
 " CtrlP configuration
+"" This ignores the `.git` directory and submodules.
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 "" Other
