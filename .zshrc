@@ -1,5 +1,4 @@
 export EDITOR='vim'
-export GOPATH=~/Development/circle/go
 
 # Machine specific configuration
 #
@@ -54,10 +53,9 @@ export PS1="$__prompt"
 
 alias home="git --work-tree=$HOME --git-dir=$HOME/.files.git"
 
-alias reload_profile="source ~/.zshrc"
+alias reload_profile="source $HOME/.zshrc"
 
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard'"
-
 
 ## File System Helpers
 
@@ -103,9 +101,12 @@ alias csu="bundle exec rake spec:unit"
 alias xcignore='curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/Objective-C.gitignore'
 
 ## Swiftenv
-export SWIFTENV_ROOT="$HOME/.swiftenv"
-export PATH="$SWIFTENV_ROOT/bin:$PATH"
-eval "$(swiftenv init -)"
+
+if [ -x "$(command -v swiftenv)" ]; then
+  export SWIFTENV_ROOT="$HOME/.swiftenv"
+  export PATH="$SWIFTENV_ROOT/bin:$PATH"
+  eval "$(swiftenv init -)"
+fi
 
 ## ~/bin
 export PATH="$HOME/bin:$PATH"
@@ -163,7 +164,6 @@ function save-keyboard-config() {
 export PATH="~/bin:$PATH"
 
 ## GPG
-#
 
 if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
   source ~/.gnupg/.gpg-agent-info
@@ -172,9 +172,3 @@ else
   eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
 fi
 
-## Ruby
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
-
-export NVM_DIR="/Users/dan/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
