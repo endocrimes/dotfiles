@@ -7,13 +7,13 @@ osx: homebrew homebrew-packages swift alcatraz airport osx-config
 ubuntu: apt-packages ruby-versions
 
 apt-packages:
-	./Aptfile.sh
+	./config/apt/install.sh
 
 homebrew:
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 homebrew-packages:
-	./Brewfile.sh
+	./.config/brew/install.sh
 
 ruby-versions:
 	ruby-install ruby-2.2.5
