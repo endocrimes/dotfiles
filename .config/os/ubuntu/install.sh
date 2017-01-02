@@ -25,7 +25,7 @@ install_package "ZSH" "zsh"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-install_package "Vim" "vim"
+install_package "Vim" "vim-nox"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
