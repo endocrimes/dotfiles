@@ -7,7 +7,7 @@ osx: homebrew homebrew-packages swift alcatraz airport osx-config
 ubuntu: apt-packages ruby-versions
 
 apt-packages:
-	./config/apt/install.sh
+	./config/os/ubuntu/install.sh
 
 homebrew:
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -42,4 +42,4 @@ airport:
 	sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
 
 osx-config:
-	./.config/osx
+	./.config/os/osx/configure.sh
