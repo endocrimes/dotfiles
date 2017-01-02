@@ -60,7 +60,7 @@ sudo apt-key adv \
   --keyserver hkp://ha.pool.sks-keyservers.net:80 \
   --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
-add_to_source_list "https://apt.dockerproject.org/repo ubuntu-xenial main" "docker"
+add_to_source_list "https://apt.dockerproject.org/repo ubuntu-xenial main" "docker.list"
 
 execute "apt-get update"
 
