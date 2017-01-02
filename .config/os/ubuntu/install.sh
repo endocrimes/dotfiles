@@ -21,33 +21,33 @@ install_package "Git" "git"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-intall_package "ZSH" "zsh"
+install_package "ZSH" "zsh"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-intall_package "Vim" "vim"
+install_package "Vim" "vim"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-intall_package "Tree" "tree"
+install_package "Tree" "tree"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-intall_package "wget" "wget"
+install_package "wget" "wget"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-intall_package "Shellcheck" "shellcheck"
+install_package "Shellcheck" "shellcheck"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-intall_package "Python" "python"
+install_package "Python" "python"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-intall_package "Python 3" "python3"
+install_package "Python 3" "python3"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-intall_package "Tmux" "tmux"
+install_package "Tmux" "tmux"
 
