@@ -1,0 +1,21 @@
+editor_cmd = vim
+
+[accounts]
+  [[default]]
+    realname = Danielle Tomlinson
+    address = dan@tomlinson.io
+    sendmail_command = msmtp --file /Users/dan/.config/msmtp/msmtprc --read-recipients --read-envelope-from 
+    sign_by_default = True
+    gpg_key = 3CE43CC7
+    sent_box = maildir:///Users/dan/.mailboxes/tomlinson-io/Outbox/
+    draft_box = maildir:///Users/dan/.mailboxes/tomlinson-io/Drafts/
+    signature_as_attachment = False
+  [[circleci]]
+    realname = Danielle Tomlinson
+    address = dani@circleci.com
+    sendmail_command = msmtp --file /Users/dan/.config/msmtp/msmtprc --read-recipients --read-envelope-from 
+    sign_by_default = True
+    gpg_key = 3CE43CC7
+    sent_box = maildir:///Users/dan/.mailboxes/circleci/Outbox/
+    draft_box = maildir:///Users/dan/.mailboxes/circleci/Drafts/
+    signature_as_attachment = False

@@ -1,0 +1,19 @@
+[retriever]
+type = SimpleIMAPSSLRetriever
+server = imap.gmail.com
+username = dani@circleci.com
+mailboxes = ("[Gmail]/All Mail",) # To pull all emails
+port = 993
+
+[destination]
+type = Maildir
+path = ~/.mailboxes/circleci/
+
+[options]
+verbose = 2
+message_log = ~/.mailboxes/logs/circleci.log
+receieved = false
+delivered_to = false
+
+# dont re-read messages its already pulled down
+read_all = false
