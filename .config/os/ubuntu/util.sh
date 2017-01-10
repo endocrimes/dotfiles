@@ -14,6 +14,10 @@ install_package() {
   fi
 }
 
+command_exists() {
+  type "$1" &> /dev/null;
+}
+
 add_key() {
   wget -qO - "$1" | sudo apt-key add - &> /dev/null
 }
