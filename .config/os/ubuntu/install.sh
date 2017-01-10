@@ -68,8 +68,8 @@ install_package "exfat-utils" "exfat-utils"
 install_package "notmuch" "notmuch"
 install_package "alot" "alot"
 install_package "msmtp" "msmtp"
-install_package "getmail" "getmail"
-install_package "w3c" "w3c"
+install_package "getmail" "getmail4"
+install_package "w3m" "w3m"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -77,17 +77,37 @@ install_package "GnuPG2" "gnupg2"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-install_package "Node" "node"
+#if ! command_exists "nvm"; then
+#  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+#fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-install_package "NPM" "npm"
+install_package "Node Package Manager" "npm"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# chruby isn't a fun time on ubuntu
+install_package "rbenv" "rbenv"
+install_package "ruby buid" "ruby-build"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+install_package "New Sources" "apt-transport-https"
+install_package "New Certificates" "ca-certificates"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+if ! package_is_installed "spotify-client"; then
+  add_to_source_list "http://repository.spotify.com stable non-free" "spotify.list"
+  execute "sudo apt-get update"
+  install_package "Spotify" "spotify-client"
+fi
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if ! package_is_installed "docker-engine"; then
-  install_package "New Sources" "apt-transport-https"
-  install_package "New Certificates" "ca-certificates"
 
   sudo apt-key adv \
     --keyserver hkp://ha.pool.sks-keyservers.net:80 \
