@@ -1,0 +1,11 @@
+! Switch Ctrl L and Alt L
+clear control
+clear mod1
+keycode 37 = Alt_L Meta_L
+keycode 64 = Control_L
+add control = Control_L Control_R
+add mod1 = Alt_L Meta_L
+
+! Switch Caps and Esc
+keycode 9 = Caps_Lock NoSymbol Caps_Lock
+keycode 66 = Escape NoSymbol Escape
