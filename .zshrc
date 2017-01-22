@@ -2,6 +2,19 @@ export EDITOR='vim'
 
 # Machine specific configuration
 #
+if [[ `uname` == 'Linux' ]]
+then
+        export LINUX=1
+else
+        export LINUX=
+fi
+
+if [[ `uname` == 'Darwin' ]]
+then
+        export OSX=1
+else
+        export OSX=
+fi
 
 if [ -f $HOME/.zsh.private ]; then
   source $HOME/.zsh.private
@@ -61,12 +74,14 @@ alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard'"
 alias showfiles="defaults write com.apple.finder AppleShowAllFiles true && killall Finder"
 alias hidefiles="defaults write com.apple.finder AppleShowAllFiles false && killall Finder"
 
-alias ls="ls --color"
-alias l="ls -lah"
+if [[ $LINUX = 1 ]]; then
+  alias ls="ls --color"
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
 
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias l="ls -lah"
 
 ## Xcode
 
