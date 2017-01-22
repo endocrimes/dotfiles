@@ -19,7 +19,7 @@
     com   = commit --verbose
     cop   = !sh -c 'git branch | cut -c 3- | selecta 2>/dev/null | xargs git checkout'
     ctags = !.git/hooks/ctags
-    d     = diff
+    d     = diff --ignore-submodules
     dc    = diff --cached
     dt    = difftool
     dtc   = difftool --cached
