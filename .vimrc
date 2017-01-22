@@ -58,8 +58,16 @@ call plug#end()
 
 "" Basic
 
-" Integrate with system keyboard
-set clipboard=unnamed
+" Integrate with system keyboard on Unix Systems.
+"" On macOS, this is the unnamed pasteboard, on other unix systems this is +
+if has("unix")
+  let s:uname = system("uname")
+  if s:uname == "Darwin\n"
+    set clipboard=unnamed
+  else
+    set clipboard=unnamedplus
+  endif
+endif
 
 " Sensible Backspace Support
 :set backspace=indent,eol,start
@@ -99,7 +107,7 @@ autocmd InsertLeave,BufNewFile,VimEnter * silent! :set relativenumber
 set hlsearch
 
 " Highlight current line
-set cursorline 
+set cursorline
 
 " Enable line wrapping
 set wrap linebreak nolist
