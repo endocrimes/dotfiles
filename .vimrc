@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-projectionist'
+Plug 'lrvick/Conque-Shell'
 
 "" File Management
 Plug 'scrooloose/nerdtree'
