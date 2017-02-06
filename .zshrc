@@ -49,11 +49,21 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 function __git_prompt() {
   local gitcurrent=`git current 2> /dev/null`
   if [[ -n $gitcurrent ]]; then
-    echo "($gitcurrent)"
+    echo "(%F{yellow}$gitcurrent%f)"
   fi
 }
 
-local __prompt='[$USER@$(hostname -s) $(basename `pwd`)$(__git_prompt)] $ '
+function __directory_prompt() {
+  echo $(basename `pwd`)
+}
+
+function __machine_info() {
+  local user=$USER
+  local host=$(hostname -s)
+  echo "%F{cyan}$user%f@%F{magenta}$host%f"
+}
+
+local __prompt='[$(__machine_info) $(__directory_prompt)$(__git_prompt)] $ '
 
 setopt PROMPT_SUBST
 export PS1="$__prompt"
