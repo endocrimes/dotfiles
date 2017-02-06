@@ -30,7 +30,8 @@
     last  = diff HEAD^ HEAD
     lastk = difftool --tool=Kaleidoscope HEAD^ HEAD
     pul   = pull
-    punch = push --force
+    punch = push --force-with-lease
+    pummel = push --force
     r     = reflog -5
     ra    = rebase --abort
     rc    = rebase --continue
