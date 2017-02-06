@@ -65,7 +65,7 @@ function __machine_info() {
   echo "%F{cyan}%n%f@%F{magenta}%m%f"
 }
 
-local __prompt='[$(__machine_info) $(__directory_prompt)$(__git_prompt)] %F{pink}$%f '
+local __prompt='[$(__machine_info) $(__directory_prompt)$(__git_prompt)] $ '
 
 setopt PROMPT_SUBST
 export PS1="$__prompt"
