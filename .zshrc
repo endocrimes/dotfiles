@@ -58,12 +58,10 @@ function __directory_prompt() {
 }
 
 function __machine_info() {
-  local user=$USER
-  local host=$(hostname -s)
-  echo "%F{cyan}$user%f@%F{magenta}$host%f"
+  echo "%F{cyan}%n%f@%F{magenta}%m%f"
 }
 
-local __prompt='[$(__machine_info) $(__directory_prompt)$(__git_prompt)] $ '
+local __prompt='[$(__machine_info) $(__directory_prompt)$(__git_prompt)] %F{pink}$%f '
 
 setopt PROMPT_SUBST
 export PS1="$__prompt"
