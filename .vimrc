@@ -52,7 +52,12 @@ Plug 'tpope/vim-rake'
 "" Rust
 Plug 'rust-lang/rust.vim'
 
+"" Python
+Plug 'vim-scripts/indentpython.vim'
+Plug 'nvie/vim-flake8'
 call plug#end()
+
+let python_highlight_all=1
 
 "" Airline
 :set laststatus=2 " Required to work without splits.
