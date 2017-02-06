@@ -49,7 +49,11 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 function __git_prompt() {
   local gitcurrent=`git current 2> /dev/null`
   if [[ -n $gitcurrent ]]; then
-    echo "(%F{yellow}$gitcurrent%f)"
+    if [[ 'master' = $gitcurrent ]]; then
+      echo "(%F{red}$gitcurrent%f)"
+    else
+      echo "(%F{yellow}$gitcurrent%f)"
+    fi
   fi
 }
 
