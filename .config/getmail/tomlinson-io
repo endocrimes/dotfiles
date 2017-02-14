@@ -1,8 +1,7 @@
 [retriever]
 type = SimpleIMAPSSLRetriever
-server = imap.gmail.com
+server = imap.fastmail.com
 username = dan@tomlinson.io
-mailboxes = ("[Gmail]/All Mail",) # To pull all emails
 port = 993
 
 [destination]

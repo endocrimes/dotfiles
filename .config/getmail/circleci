@@ -2,7 +2,7 @@
 type = SimpleIMAPSSLRetriever
 server = imap.gmail.com
 username = dani@circleci.com
-mailboxes = ("[Gmail]/All Mail",) # To pull all emails
+mailboxes = ("[Gmail]/All Mail",)
 port = 993
 
 [destination]
