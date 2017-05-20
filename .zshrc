@@ -1,19 +1,13 @@
 export EDITOR='vim'
 
-# Machine specific configuration
-#
-if [[ `uname` == 'Linux' ]]
-then
-        export LINUX=1
-else
-        export LINUX=
+ZSH_CONFIG_ROOT=$HOME/.config/zsh
+
+if [ -f $ZSH_CONFIG_ROOT/autodetect.zsh ]; then
+  source $ZSH_CONFIG_ROOT/autodetect.zsh
 fi
 
-if [[ `uname` == 'Darwin' ]]
-then
-        export OSX=1
-else
-        export OSX=
+if [ -f $ZSH_CONFIG_ROOT/history.zsh ]; then
+  source $ZSH_CONFIG_ROOT/history.zsh
 fi
 
 if [ -f $HOME/.zsh.private ]; then
@@ -22,114 +16,45 @@ fi
 
 plugins=(git ssh-agent)
 
-# History Support
-#
-
-HISTFILE=~/.zsh_history
-HISTSIZE=999999999
-SAVEHIST=$HISTSIZE
-setopt BANG_HIST                 # Treat the '!' character specially during expansion.
-setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
-setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
-setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
-setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
-setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
-setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
-setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
-setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
-setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
-setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
-setopt HIST_BEEP                 # Beep when accessing nonexistent history.
-
 # General
 #
 
 # Prompt
 
-function __git_prompt() {
-  local gitcurrent=`git current 2> /dev/null`
-  if [[ -n $gitcurrent ]]; then
-    if [[ 'master' = $gitcurrent ]]; then
-      echo "(%F{red}$gitcurrent%f)"
-    else
-      echo "(%F{yellow}$gitcurrent%f)"
-    fi
-  fi
-}
-
-function __directory_prompt() {
-  echo $(basename `pwd`)
-}
-
-function __machine_info() {
-  echo "%F{cyan}%n%f@%F{magenta}%m%f"
-}
-
-local __prompt='[$(__machine_info) $(__directory_prompt)$(__git_prompt)] $ '
-
-setopt PROMPT_SUBST
-export PS1="$__prompt"
+if [ -f $ZSH_CONFIG_ROOT/prompt.zsh ]; then
+  source $ZSH_CONFIG_ROOT/prompt.zsh
+fi
 
 # Command Alias
 #
 
-## Dotfile management
-
-alias home="git --work-tree=$HOME --git-dir=$HOME/.files.git"
-
-alias reload_profile="source $HOME/.zshrc"
-
-alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard'"
-
-## File System Helpers
-
-alias showfiles="defaults write com.apple.finder AppleShowAllFiles true && killall Finder"
-alias hidefiles="defaults write com.apple.finder AppleShowAllFiles false && killall Finder"
-
-if [[ $LINUX = 1 ]]; then
-  alias ls="ls --color"
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
-fi
-
-alias l="ls -lah"
-
-## Xcode
-
-alias xcp="open *.xcodeproj"
-alias xcw="open *.xcworkspace"
-
-## Git
-
-alias gs="git status --ignore-submodules"
-
-## Clean up all local branches that are fully merged.
-#
-# This does not touch the remote so should be fine to run as often as you pull.
-#
-alias clean-branches="git branch --merged | grep -v '\*' | grep -v master | grep -v dev | xargs -n 1 git branch -d"
-
-function open_dirty_files() {
-  vim $(git status --porcelain | awk '{print $2}')
+function hexe() {
+  HEXE_BIN="$HOME/development/hexe/hexe"
+  if [[ -n $1 ]]; then
+    exec "$HEXE_BIN" "$1"
+  else
+    "$HEXE_BIN"
+  fi
 }
 
-## Emacs
-alias ec="emacsclient -c -nw -t -a ''"
+## Load Configs
+# Inheritance:
+# zsh/alias.sh
+#   zsh/$os/alias.sh
 
-## Docker
+if [ -f $ZSH_CONFIG_ROOT/alias.zsh ]; then
+  source $ZSH_CONFIG_ROOT/alias.zsh
+fi
 
-## I use docker-compose way more often than I use a decimal calculator.
-alias dc="docker-compose"
-
-## Bundle
-alias be="bundle exec"
-
-## CocoaPods
-alias csu="bundle exec rake spec:unit"
-
-## Git Related
-alias xcignore='curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/Objective-C.gitignore'
+if [[ $LINUX = 1 ]]; then
+  if [ -f $ZSH_CONFIG_ROOT/linux/alias.zsh ]; then
+    source $ZSH_CONFIG_ROOT/linux/alias.zsh
+  fi
+elif [[ $OSX = 1 ]]; then
+  if [ -f $ZSH_CONFIG_ROOT/osx/alias.zsh ]; then
+    source $ZSH_CONFIG_ROOT/osx/alias.zsh
+  fi
+fi
 
 ## Swiftenv
 
@@ -141,67 +66,4 @@ fi
 
 ## ~/bin
 export PATH="$HOME/bin:$PATH"
-
-## Keyboard
-
-function __remove_file_if_present() {
-  if [ -f $1 ]; then
-    rm $1
-  fi
-}
-
-function __backup_file() {
-  BACKUP_PATH="$1.bkp"
-  __remove_file_if_present $BACKUP_PATH
-  cp $1 $BACKUP_PATH
-}
-
-function use-keyboard-config() {
-  KARIBINER_CONFIG_PATH="$HOME/.karabiner.d/configuration/karabiner.json"
-  CONFIGURATIONS_DIR="$HOME/.config/karabiner"
-
-  NEW_CONFIG_PATH="$CONFIGURATIONS_DIR/$1.json"
-
-  if [ ! -f $NEW_CONFIG_PATH ]; then
-    echo "No configuration exists at path: $NEW_CONFIG_PATH"
-    return
-  fi
-
-  echo "Switching to configuration: $NEW_CONFIG_PATH"
-
-  __backup_file $KARIBINER_CONFIG_PATH
-  rm $KARIBINER_CONFIG_PATH
-  cp $NEW_CONFIG_PATH $KARIBINER_CONFIG_PATH
-
-  echo "Done! - Your old config can be found at $KARIBINER_CONFIG_PATH.bkp"
-}
-
-function save-keyboard-config() {
-  KARIBINER_CONFIG_PATH="$HOME/.karabiner.d/configuration/karabiner.json"
-  CONFIGURATIONS_DIR="$HOME/.config/karabiner"
-  NEW_CONFIG_PATH="$CONFIGURATIONS_DIR/$1.json"
-  if [ -f $NEW_CONFIG_PATH ]; then
-    echo "Configuration already exists at path: $NEW_CONFIG_PATH. Making backup."
-    __backup_file $NEW_CONFIG_PATH
-    rm $NEW_CONFIG_PATH
-  fi
-
-  cp $KARIBINER_CONFIG_PATH $NEW_CONFIG_PATH
-
-  echo "Saved to: $NEW_CONFIG_PATH!"
-}
-
-## Random Scripts
-export PATH="~/bin:$PATH"
-
-## GPG
-
-if [[ $(uname -a) == "Darwin" ]]; then
-  if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
-    source ~/.gnupg/.gpg-agent-info
-    export GPG_AGENT_INFO
-  else
-    eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
-  fi
-fi
 
