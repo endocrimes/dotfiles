@@ -3,10 +3,12 @@
 call plug#begin('~/.vim/plugged')
 
 "" Shared
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-projectionist'
-Plug 'lrvick/Conque-Shell'
+Plug 'benmills/vimux'
+Plug 'janko-m/vim-test'
 
 "" File Management
 Plug 'scrooloose/nerdtree'
@@ -15,10 +17,11 @@ Plug 'kien/ctrlp.vim'
 "" Theming and UI tweaks
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'ntpeters/vim-better-whitespace'
 
 "" Git
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 "" GitHub
 Plug 'jaxbot/github-issues.vim'
@@ -32,9 +35,11 @@ Plug 'ervandew/supertab'
 Plug 'jamessan/vim-gnupg'
 
 "" Clojure
+Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-scripts/paredit.vim'
 Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-clojure-static'
+" Plug 'venantius/vim-cljfmt'
 
 "" Elixir
 Plug 'elixir-lang/vim-elixir'
@@ -93,8 +98,24 @@ vmap > >gv
 "" Map leader to ,
 let mapleader=','
 
+"" Save
+nmap <leader>w :w!<cr>
+
+" Move up and down on splitted lines (on small width screens)
+map <Up> gk
+map <Down> gj
+map k gk
+map j gj
+
 "" Mousing
 set mouse=a
+
+"" Testing
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 "" Visual Settings
 syntax enable
@@ -111,6 +132,9 @@ autocmd InsertLeave,BufNewFile,VimEnter * silent! :set relativenumber
 
 " Highlight all search matches
 set hlsearch
+
+"" Sometimes disabling this is really nice.
+nnoremap <leader><space> :nohlsearch<CR>
 
 " Highlight current line
 set cursorline
@@ -142,9 +166,6 @@ cnoreabbrev Q q
 cnoreabbrev Wq wq
 cnoreabbrev WQ wq
 
-" Autocomplete <3
-imap <Leader>` <C-P>
-
 " Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
@@ -162,9 +183,19 @@ nnoremap <Leader>m :make<CR>
 let g:NERDTreeShowHidden=1
 noremap <Leader>3 :NERDTreeToggle<CR>
 
-" CtrlP configuration
-"" This ignores the `.git` directory and submodules.
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+if executable('rg')
+  " Use rg instead of grep
+  set grepprg=rg\ --column\ --color=never
+
+  " Use rg for ctrlp for listing files
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+
+  " rg is fast enough that we don't need caching
+  let g:ctrlp_use_caching = 0
+else
+  "" This ignores the `.git` directory and submodules.
+  let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+endif
 
 "" Other
 
