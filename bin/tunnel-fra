@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# Tunnel ALL THE THINGS through frankfurt.
+# Usage: `tunnel-fra`
+#
+
+if hash sshuttle 2>/dev/null; then
+  sshuttle --dns -r streisand 0/0
+else
+  echo "The tool 'sshuttle' is not installed."
+  echo "Please use 'brew install sshuttle' or '[sudo] apt-get install sshuttle' and try again."
+fi
