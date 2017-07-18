@@ -1,0 +1,27 @@
+#!/bin/bash
+set -o nounset
+set -o errexit
+set -o pipefail
+
+declare -r max=4
+declare i=0
+
+function wrap() {
+  local cmd=$1 ; shift
+  retry "$cmd" "$@"
+  set -o errexit
+}
+
+function retry() {
+  set +o errexit
+  local cmd=$1 ; shift
+  $cmd "$@"
+  if [ $? -ne 0 ] && [ $i -lt $max ] ; then
+    i=(i+1)
+    echo "Retrying"
+    sleep 2
+    retry "$cmd" "$@"
+  fi
+}
+
+wrap "$@"

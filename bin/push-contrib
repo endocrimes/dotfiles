@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+#
+# Usage: `git push-external-pr`
+
+
+def repo_slug_from_url(url)
+  url[%r{github.com[/:]([^/]*/(?:(?!\.git)[^/])*)\.*}, 1]
+end
+
+def repo_current_branch
+  `git rev-parse --abbrev-ref HEAD`.strip
+end
+
+def pr_id
+  repo_current_branch.gsub('pr/', '')
+end
+
+def repo_url
+  `git config --get remote.origin.url`.strip
+end
+
+def fetch_pr_json(slug, pr_id)
+  path = "repos/#{slug}/pulls/#{pr_id}"
+  require 'net/http'
+  require 'uri'
+  require 'json'
+
+  puts path
+  uri = URI.parse("https://api.github.com/#{path}")
+  response = Net::HTTP.get_response(uri)
+  JSON.parse(response.body)
+end
+
+slug = repo_slug_from_url(repo_url)
+
+raise 'Not a git repo or valid pr branch. Exiting.' unless pr_id && slug
+
+pr_json = fetch_pr_json(slug, pr_id)
+git_remote_ref = pr_json['head']['ref']
+git_url = pr_json['head']['repo']['ssh_url']
+remote_name = "pr-#{pr_id}"
+
+`git remote add #{remote_name} #{git_url}`
+`git push #{remote_name} #{repo_current_branch}:#{git_remote_ref}`
+`git remote remove #{remote_name}`
