@@ -1,6 +1,8 @@
 export EDITOR='vim'
 
-ZSH_CONFIG_ROOT=$HOME/.config/zsh
+export CONFIG_HOME=$HOME/.config
+export ZSH_CONFIG_ROOT=$CONFIG_HOME/zsh
+export VIM_CONFIG_HOME=$CONFIG_HOME/vim
 
 if [ -f $ZSH_CONFIG_ROOT/autodetect.zsh ]; then
   source $ZSH_CONFIG_ROOT/autodetect.zsh
