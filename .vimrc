@@ -18,6 +18,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'tssm/fairyfloss.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 "" Git
 Plug 'tpope/vim-fugitive'
@@ -99,14 +100,28 @@ nnoremap <silent><leader>1 :set rnu! rnu? <cr>
 autocmd InsertEnter * silent! :set norelativenumber
 autocmd InsertLeave,BufNewFile,VimEnter * silent! :set relativenumber
 
+" Rainbow parens for Clojure
+
+let g:rbpt_max = 15
+autocmd Filetype clojure RainbowParenthesesActivate
+autocmd Syntax clojure RainbowParenthesesLoadRound
+autocmd Filetype clojurescript RainbowParenthesesActivate
+autocmd Syntax clojurescript RainbowParenthesesLoadRound
+
 if has("termguicolors")
   set termguicolors
   set background=dark
   colorscheme fairyfloss
+  let g:rbpt_colorpairs = [
+        \ ['brown',    '#a8a4b1'],
+        \ ['Darkblue',    '#c5a3ff'],
+        \ ['darkgray',    '#a8a4b1'],
+        \ ]
 else
   set background=dark
   colorscheme solarized
   call togglebg#map("<F5>")
+  " Remove Black Parens
   let g:rbpt_colorpairs = [
         \ ['brown',       'RoyalBlue3'],
         \ ['Darkblue',    'SeaGreen3'],
@@ -220,15 +235,6 @@ let g:clojure_align_subforms = 1
 
 " Make sure that .cljx files are recognised as Clojure.
 autocmd BufNewFile,BufRead *.cljx setlocal filetype=clojure
-
-" Rainbow parens for Clojure
-
-" Remove Black Parens
-let g:rbpt_max = 15
-autocmd Filetype clojure RainbowParenthesesActivate
-autocmd Syntax clojure RainbowParenthesesLoadRound
-autocmd Filetype clojurescript RainbowParenthesesActivate
-autocmd Syntax clojurescript RainbowParenthesesLoadRound
 
 "
 " Go
