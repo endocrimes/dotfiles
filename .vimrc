@@ -15,7 +15,7 @@ Plug 'benmills/vimux'
 
 "" Theming and UI tweaks
 Plug 'altercation/vim-colors-solarized'
-Plug 'tssm/fairyfloss.vim'
+Plug 'dantoml/fairyfloss.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
