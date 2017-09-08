@@ -85,6 +85,7 @@ set scrolloff=3
 
 " Nobody is happy until they have these
 cnoreabbrev W w
+cnoreabbrev X x
 cnoreabbrev Q q
 cnoreabbrev Wq wq
 cnoreabbrev WQ wq
