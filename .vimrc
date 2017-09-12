@@ -98,16 +98,23 @@ vmap > >gv
 "" going in and out of insert mode.
 set number
 nnoremap <silent><leader>1 :set rnu! rnu? <cr>
-autocmd InsertEnter * silent! :set norelativenumber
-autocmd InsertLeave,BufNewFile,VimEnter * silent! :set relativenumber
+augroup numberwang
+  autocmd!
+  autocmd InsertEnter * silent! :set norelativenumber
+  autocmd InsertLeave,BufNewFile,VimEnter * silent! :set relativenumber
+augroup END
 
 " Rainbow parens for Clojure
 
 let g:rbpt_max = 15
-autocmd Filetype clojure RainbowParenthesesActivate
-autocmd Syntax clojure RainbowParenthesesLoadRound
-autocmd Filetype clojurescript RainbowParenthesesActivate
-autocmd Syntax clojurescript RainbowParenthesesLoadRound
+
+augroup filetype_clojure
+  autocmd!
+  autocmd Filetype clojure RainbowParenthesesActivate
+  autocmd Syntax clojure RainbowParenthesesLoadRound
+  autocmd Filetype clojurescript RainbowParenthesesActivate
+  autocmd Syntax clojurescript RainbowParenthesesLoadRound
+augroup END
 
 if has("termguicolors")
   set termguicolors
@@ -163,6 +170,7 @@ map j gj
 "" Mousing
 
 "" Testing
+let test#strategy = "vimux"
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
@@ -240,15 +248,19 @@ autocmd BufNewFile,BufRead *.cljx setlocal filetype=clojure
 "
 " Go
 "
-autocmd FileType go nmap <leader>r <Plug>(go-run)
-autocmd FileType go nmap <leader>b <Plug>(go-build)
-autocmd FileType go nmap <leader>t <Plug>(go-test)
-autocmd FileType go nmap <leader>c <Plug>(go-coverage)
+augroup filetype_go
+  autocmd!
 
-" Look ups and documentation
-autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
-autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
-autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+  autocmd FileType go nmap <leader>r <Plug>(go-run)
+  autocmd FileType go nmap <leader>b <Plug>(go-build)
+  autocmd FileType go nmap <leader>t <Plug>(go-test)
+  autocmd FileType go nmap <leader>c <Plug>(go-coverage)
+
+  " Look ups and documentation
+  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
+  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+  autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+augroup END
 
 " Enable syntax-highlighting for Functions, Methods and Structs
 let g:go_highlight_functions = 1
