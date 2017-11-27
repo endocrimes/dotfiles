@@ -17,7 +17,7 @@ function retry() {
   local cmd=$1 ; shift
   $cmd "$@"
   if [ $? -ne 0 ] && [ $i -lt $max ] ; then
-    i=(i+1)
+    i=$((i+1))
     echo "Retrying"
     sleep 2
     retry "$cmd" "$@"
