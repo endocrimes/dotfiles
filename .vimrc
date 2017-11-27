@@ -37,6 +37,7 @@ Plug 'vim-scripts/paredit.vim'
 Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-clojure-static'
 
+Plug 'hashivim/vim-terraform'
 Plug 'fatih/vim-go'
 Plug 'keith/swift.vim'
 Plug 'vim-ruby/vim-ruby'
