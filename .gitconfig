@@ -1,7 +1,7 @@
 [user]
     name = Danielle Tomlinson
-    email = dan@tomlinson.io
-    signingkey = 3CE43CC7
+    email = dani@tomlinson.io
+    signingkey = 4B34C887
 [core]
     excludesfile = ~/.gitignore
 [mergetool]
@@ -58,4 +58,4 @@
 [push]
     default = simple
 [commit]
-	gpgsign = true
+#  	gpgsign = true
