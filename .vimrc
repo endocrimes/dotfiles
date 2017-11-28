@@ -38,6 +38,7 @@ Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-clojure-static'
 
 Plug 'hashivim/vim-terraform'
+Plug 'juliosueiras/vim-terraform-completion'
 Plug 'fatih/vim-go'
 Plug 'keith/swift.vim'
 Plug 'vim-ruby/vim-ruby'
