@@ -60,7 +60,7 @@ set noerrorbells               " please don't make noises
 set backspace=indent,eol,start " Makes backspace more useful
 set noswapfile                 " I like to live dangerously
 set nobackup                   " Very dangerously in fact
-set nowritebackup
+set nowritebackup              " No, seriously, danger is my middle name
 
 set wrap linebreak nolist
 set colorcolumn=80
