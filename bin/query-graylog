@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+GRAYLOG_CREDS="$(~/.config/credstore/getpass graylog)"
+SEARCH_RANGE=${RANGE:-3600}
+query="$@"
+curl "http://${GRAYLOG_CREDS}@127.0.0.1:9000/api/search/universal/relative/export" \
+        --get \
+        --data-urlencode "query=${query}" \
+        --data-urlencode "range=${SEARCH_RANGE}" \
+        --data-urlencode 'fields=source,file,beat_journal_container_name,message,full_message' \
+        -H 'Accept-Encoding: gzip, deflate, br' \
+        -H 'Accept-Language: en-US,en;q=0.8' \
+        --compressed  -sSL
