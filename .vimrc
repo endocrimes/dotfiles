@@ -22,6 +22,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 "" Git
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
 
 "" GitHub
@@ -88,6 +89,7 @@ set scrolloff=3
 " Nobody is happy until they have these
 cnoreabbrev W w
 cnoreabbrev X x
+cnoreabbrev Xa xa
 cnoreabbrev Q q
 cnoreabbrev Wq wq
 cnoreabbrev WQ wq
@@ -261,7 +263,7 @@ augroup filetype_go
   " Look ups and documentation
   autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
   autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
-  autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+  autocmd FileType go nmap <Leader>dv <Plug>(go-doc-vertical)
 augroup END
 
 " Enable syntax-highlighting for Functions, Methods and Structs
@@ -271,6 +273,11 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
+" Automatically lookup info
+set updatetime=100
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
 
 " Syntastic doesn't always play nicely with vim-go
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
