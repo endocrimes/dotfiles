@@ -25,10 +25,6 @@ install_package "ZSH" "zsh"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-install_package "Vim" "vim-nox-py2"
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 install_package "Tree" "tree"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -53,10 +49,6 @@ install_package "Tmux" "tmux"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-install_package "Terminator" "terminator"
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 install_package "exfat-fuse" "exfat-fuse"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -65,25 +57,7 @@ install_package "exfat-utils" "exfat-utils"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-install_package "notmuch" "notmuch"
-install_package "alot" "alot"
-install_package "msmtp" "msmtp"
-install_package "getmail" "getmail4"
-install_package "w3m" "w3m"
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 install_package "GnuPG2" "gnupg2"
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-#if ! command_exists "nvm"; then
-#  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
-#fi
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-install_package "Node Package Manager" "npm"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -95,15 +69,6 @@ install_package "ruby buid" "ruby-build"
 
 install_package "New Sources" "apt-transport-https"
 install_package "New Certificates" "ca-certificates"
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-if ! package_is_installed "spotify-client"; then
-  add_to_source_list "http://repository.spotify.com stable non-free" "spotify.list"
-  execute "sudo apt-get update"
-  install_package "Spotify" "spotify-client"
-fi
-
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
