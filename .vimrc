@@ -38,6 +38,8 @@ Plug 'vim-scripts/paredit.vim'
 Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-clojure-static'
 
+Plug 'idris-hackers/idris-vim'
+Plug 'wlangstroth/vim-racket'
 Plug 'hashivim/vim-terraform'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'fatih/vim-go'
@@ -282,3 +284,4 @@ let g:go_auto_sameids = 1
 " Syntastic doesn't always play nicely with vim-go
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:syntastic_enable_racket_racket_checker = 1
