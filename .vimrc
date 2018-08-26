@@ -1,24 +1,27 @@
 call plug#begin('~/.vim/plugged')
 
-"" Shared
+"" Good Navigation
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
-Plug 'jamessan/vim-gnupg'
+
+"" Useful tools
 Plug 'tpope/vim-commentary'
-Plug 'vim-syntastic/syntastic'
-Plug 'tpope/vim-projectionist'
-Plug 'janko-m/vim-test'
+Plug 'w0rp/ale'
 Plug 'ntpeters/vim-better-whitespace'
 
+"" Nice test running
+Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'benmills/vimux'
 
 "" Theming and UI tweaks
 Plug 'altercation/vim-colors-solarized'
 Plug 'dantoml/fairyfloss.vim'
-Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+"" GPG is a necessary evil.
+Plug 'jamessan/vim-gnupg'
 
 "" Git
 Plug 'tpope/vim-fugitive'
@@ -31,22 +34,41 @@ Plug 'keith/gist.vim'
 "" Autocomplete
 Plug 'tpope/vim-endwise'
 Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe'
 
 "" Clojure
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'vim-scripts/paredit.vim'
-Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-clojure-static'
+Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
+Plug 'vim-scripts/paredit.vim', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
-Plug 'hashivim/vim-terraform'
-Plug 'juliosueiras/vim-terraform-completion'
+"" Help I accidentally an ops
+Plug 'hashivim/vim-terraform', { 'for': 'hcl' }
+Plug 'juliosueiras/vim-terraform-completion', { 'for': 'hcl' }
+Plug 'fatih/vim-hclfmt'
+Plug 'fatih/vim-nginx' , {'for' : 'nginx'}
+Plug 'hashivim/vim-hashicorp-tools'
+
+"" Markdown
+Plug 'plasticboy/vim-markdown'
+
+"" This is the saddest thing i ever added
+Plug 'PProvost/vim-ps1'
+
+"" Golang
 Plug 'fatih/vim-go'
-Plug 'keith/swift.vim'
+
+"" Python
+Plug 'vim-scripts/indentpython.vim', { 'for': 'python' }
+Plug 'nvie/vim-flake8', { 'for': 'python' }
+
+"" Ruby
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rake'
+
+"" Other
+Plug 'keith/swift.vim'
 Plug 'rust-lang/rust.vim'
-Plug 'vim-scripts/indentpython.vim'
-Plug 'nvie/vim-flake8'
 call plug#end()
 
 set nocompatible " required (to be iMproved)
@@ -280,5 +302,5 @@ let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 
 " Syntastic doesn't always play nicely with vim-go
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:ale_linters = {'go': ['golint', 'govet', 'errcheck']}
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
