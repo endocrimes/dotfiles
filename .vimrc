@@ -249,7 +249,6 @@ endif
 
 " If ripgrep is installed, use it, as it is /fast/.
 if executable('rg')
-  " Use rg instead of grep
   set grepprg=rg\ --column\ --color=never
 
   " Use rg for ctrlp for listing files
@@ -267,27 +266,12 @@ endif
 "
 
 let g:clojure_align_subforms = 1
-
 " Make sure that .cljx files are recognised as Clojure.
 autocmd BufNewFile,BufRead *.cljx setlocal filetype=clojure
 
 "
 " Go
 "
-augroup filetype_go
-  autocmd!
-
-  autocmd FileType go nmap <leader>r <Plug>(go-run)
-  autocmd FileType go nmap <leader>b <Plug>(go-build)
-  autocmd FileType go nmap <leader>t <Plug>(go-test)
-  autocmd FileType go nmap <leader>c <Plug>(go-coverage)
-
-  " Look ups and documentation
-  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
-  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
-  autocmd FileType go nmap <Leader>dv <Plug>(go-doc-vertical)
-augroup END
-
 " Enable syntax-highlighting for Functions, Methods and Structs
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -296,11 +280,55 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+let g:go_fmt_fail_silently = 1
+let g:go_fmt_command = "goimports"
+let g:go_fmt_options = {
+  \ 'goimports': '-local do/',
+  \ }
+
+let g:go_def_mode = "guru"
+let g:go_echo_command_info = 1
+let g:go_gocode_autobuild = 1
+let g:go_gocode_unimported_packages = 1
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
 " Automatically lookup info
 set updatetime=100
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 
-" Syntastic doesn't always play nicely with vim-go
 let g:ale_linters = {'go': ['golint', 'govet', 'errcheck']}
-" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
+augroup filetype_go
+  autocmd!
+
+  autocmd FileType go nmap <leader>r <Plug>(go-run)
+  autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+  autocmd FileType go nmap <leader>t <Plug>(go-test)
+  autocmd FileType go nmap <silent> <Leader>c <Plug>(go-coverage-toggle)
+
+  " Look ups and documentation
+  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
+  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+  autocmd FileType go nmap <Leader>dv <Plug>(go-doc-vertical)
+  autocmd FileType go nmap <silent> <Leader>i <Plug>(go-info)
+  autocmd FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
+augroup END
+
+
+"
+" Markdown
+"
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_fenced_languages = ['go=go', 'viml=vim', 'bash=sh']
+let g:vim_markdown_new_list_item_indent = 2
+
