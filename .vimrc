@@ -1,24 +1,27 @@
 call plug#begin('~/.vim/plugged')
 
-"" Shared
+"" Good Navigation
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
-Plug 'jamessan/vim-gnupg'
+
+"" Useful tools
 Plug 'tpope/vim-commentary'
-Plug 'vim-syntastic/syntastic'
-Plug 'tpope/vim-projectionist'
-Plug 'janko-m/vim-test'
+Plug 'w0rp/ale'
 Plug 'ntpeters/vim-better-whitespace'
 
+"" Nice test running
+Plug 'janko-m/vim-test'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'benmills/vimux'
 
 "" Theming and UI tweaks
 Plug 'altercation/vim-colors-solarized'
 Plug 'dantoml/fairyfloss.vim'
-Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+"" GPG is a necessary evil.
+Plug 'jamessan/vim-gnupg'
 
 "" Git
 Plug 'tpope/vim-fugitive'
@@ -31,24 +34,41 @@ Plug 'keith/gist.vim'
 "" Autocomplete
 Plug 'tpope/vim-endwise'
 Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe'
 
 "" Clojure
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'vim-scripts/paredit.vim'
-Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-clojure-static'
+Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
+Plug 'vim-scripts/paredit.vim', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
-Plug 'idris-hackers/idris-vim'
-Plug 'wlangstroth/vim-racket'
-Plug 'hashivim/vim-terraform'
-Plug 'juliosueiras/vim-terraform-completion'
+"" Help I accidentally an ops
+Plug 'hashivim/vim-terraform', { 'for': 'hcl' }
+Plug 'juliosueiras/vim-terraform-completion', { 'for': 'hcl' }
+Plug 'fatih/vim-hclfmt'
+Plug 'fatih/vim-nginx' , {'for' : 'nginx'}
+Plug 'hashivim/vim-hashicorp-tools'
+
+"" Markdown
+Plug 'plasticboy/vim-markdown'
+
+"" This is the saddest thing i ever added
+Plug 'PProvost/vim-ps1'
+
+"" Golang
 Plug 'fatih/vim-go'
-Plug 'keith/swift.vim'
+
+"" Python
+Plug 'vim-scripts/indentpython.vim', { 'for': 'python' }
+Plug 'nvie/vim-flake8', { 'for': 'python' }
+
+"" Ruby
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rake'
+
+"" Other
+Plug 'keith/swift.vim'
 Plug 'rust-lang/rust.vim'
-Plug 'vim-scripts/indentpython.vim'
-Plug 'nvie/vim-flake8'
 call plug#end()
 
 set nocompatible " required (to be iMproved)
@@ -229,7 +249,6 @@ endif
 
 " If ripgrep is installed, use it, as it is /fast/.
 if executable('rg')
-  " Use rg instead of grep
   set grepprg=rg\ --column\ --color=never
 
   " Use rg for ctrlp for listing files
@@ -247,27 +266,12 @@ endif
 "
 
 let g:clojure_align_subforms = 1
-
 " Make sure that .cljx files are recognised as Clojure.
 autocmd BufNewFile,BufRead *.cljx setlocal filetype=clojure
 
 "
 " Go
 "
-augroup filetype_go
-  autocmd!
-
-  autocmd FileType go nmap <leader>r <Plug>(go-run)
-  autocmd FileType go nmap <leader>b <Plug>(go-build)
-  autocmd FileType go nmap <leader>t <Plug>(go-test)
-  autocmd FileType go nmap <leader>c <Plug>(go-coverage)
-
-  " Look ups and documentation
-  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
-  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
-  autocmd FileType go nmap <Leader>dv <Plug>(go-doc-vertical)
-augroup END
-
 " Enable syntax-highlighting for Functions, Methods and Structs
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -276,12 +280,54 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+let g:go_fmt_fail_silently = 1
+let g:go_fmt_command = "goimports"
+let g:go_fmt_options = {
+  \ 'goimports': '-local do/',
+  \ }
+
+let g:go_def_mode = "guru"
+let g:go_echo_command_info = 1
+let g:go_gocode_autobuild = 1
+let g:go_gocode_unimported_packages = 1
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
 " Automatically lookup info
 set updatetime=100
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 
-" Syntastic doesn't always play nicely with vim-go
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:syntastic_enable_racket_racket_checker = 1
+let g:ale_linters = {'go': ['golint', 'govet', 'errcheck']}
+
+augroup filetype_go
+  autocmd!
+
+  autocmd FileType go nmap <leader>r <Plug>(go-run)
+  autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+  autocmd FileType go nmap <leader>t <Plug>(go-test)
+  autocmd FileType go nmap <silent> <Leader>c <Plug>(go-coverage-toggle)
+
+  " Look ups and documentation
+  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
+  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+  autocmd FileType go nmap <Leader>dv <Plug>(go-doc-vertical)
+  autocmd FileType go nmap <silent> <Leader>i <Plug>(go-info)
+  autocmd FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
+augroup END
+
+
+"
+" Markdown
+"
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_fenced_languages = ['go=go', 'viml=vim', 'bash=sh']
+let g:vim_markdown_new_list_item_indent = 2
