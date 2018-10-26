@@ -16,7 +16,7 @@ def repo_url
 end
 
 def open(repo, branch)
-  `chromium-browser https://circleci.com/gh/#{repo}/tree/#{branch}`
+  `open https://circleci.com/gh/#{repo}/tree/#{branch}`
 end
 
 slug = repo_slug_from_url(repo_url)
