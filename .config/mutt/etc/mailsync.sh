@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # This script will run offlineimap and check
 # for new email if there is an internet connection.
 #
@@ -7,12 +7,21 @@
 #
 # I have this run as a cronjob every 5 minutes.
 
+set -o pipefail
+set -o errexit
+
 # Check for internet connection. Exit script if none. (timeout on macOS is `-t`)
 if [ "$(uname)" == "Darwin" ]
 then
   ping -q -t 1 -c 1 "$(ip r | grep default | cut -d ' ' -f 3)" >/dev/null || exit
 else
   ping -q -w 1 -c 1 "$(ip r | grep default | cut -d ' ' -f 3)" >/dev/null || exit
+fi
+
+# Check for yubikey (for decrypting secrets)
+if [ "$(uname)" == "Darwin" ]
+then
+  ioreg -p IOUSB | grep Yubikey >/dev/null || exit
 fi
 
 # Get current number of new mail, then begin sync.
