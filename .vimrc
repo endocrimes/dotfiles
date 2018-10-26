@@ -4,6 +4,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 
+Plug 'aklt/plantuml-syntax'
+
 "" Useful tools
 Plug 'tpope/vim-commentary'
 Plug 'w0rp/ale'
@@ -269,6 +271,8 @@ let g:clojure_align_subforms = 1
 " Make sure that .cljx files are recognised as Clojure.
 autocmd BufNewFile,BufRead *.cljx setlocal filetype=clojure
 
+autocmd FileType clojure nmap <Leader>t :RunTests<CR>
+
 "
 " Go
 "
@@ -324,6 +328,24 @@ augroup filetype_go
   autocmd FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
 augroup END
 
+"
+" Rust
+"
+augroup filetype_rust
+  autocmd!
+augroup END
+
+let g:autofmt_autosave = 1
+
+"
+" Docker
+"
+
+" Make sure that Dockerfile.{release,development} files are recognised as Dockerfiles.
+" - This explcitily whitelists extensions to allow e.g .m4 templates to render
+"   correctly.
+autocmd BufNewFile,BufRead Dockerfile.release setlocal filetype=dockerfile
+autocmd BufNewFile,BufRead Dockerfile.dev* setlocal filetype=dockerfile
 
 "
 " Markdown
