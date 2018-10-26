@@ -2,7 +2,7 @@
 
 all: ruby-packages
 
-osx: homebrew homebrew-packages swift alcatraz airport osx-config
+osx: homebrew homebrew-packages airport osx-config
 
 ubuntu: apt-packages ruby-versions
 
