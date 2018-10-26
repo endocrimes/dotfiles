@@ -353,4 +353,3 @@ autocmd BufNewFile,BufRead Dockerfile.dev* setlocal filetype=dockerfile
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_fenced_languages = ['go=go', 'viml=vim', 'bash=sh']
 let g:vim_markdown_new_list_item_indent = 2
-
