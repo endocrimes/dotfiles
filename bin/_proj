@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+slug="$1"
+
+if [[ -z $slug ]]; then
+echo "Usage: proj [ORGNAME]/[REPONAME]"
+exit 1
+fi
+
+IFS='/' read -r -a slug_components <<< "$slug"
+
+org_dir="$HOME/development/src/github.com/${slug_components[0]}"
+repo_dir="$org_dir/${slug_components[1]}"
+
+if [[ ! -w "$org_dir" ]]; then
+  mkdir -p "$org_dir"
+fi
+
+echo "$repo_dir"
+
+if [[ ! -w "$repo_dir" ]]; then
+  git ghclone "$slug"
+fi
+
+cd "$repo_dir" || exit
+
+exec "$SHELL" -l

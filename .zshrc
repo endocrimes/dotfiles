@@ -39,6 +39,13 @@ function hexe() {
   fi
 }
 
+
+function proj() {
+  if [[ -x "$HOME/bin/_proj" ]]; then
+    exec _proj $1
+  fi
+}
+
 ## Load Configs
 # Inheritance:
 # zsh/alias.sh
@@ -71,3 +78,5 @@ export PATH="$HOME/bin:$PATH"
 
 
 export PATH="$HOME/.local/bin:$PATH"
+
+export PONY_KEYID="2DF3678C4B34C887"
