@@ -27,6 +27,11 @@ install_brew tmux;
 install_brew class-dump;
 install_brew shellcheck;
 
+install_brew mutt;
+install_brew offlineimap;
+install_brew msmtp;
+install_brew mpv; # Notifications from mutt
+
 install_brew dantoml/formulae/git-cleanup;
 install_brew dantoml/formulae/git-promote;
 
