@@ -3,7 +3,7 @@
 # $ devbuild -t <token> [-p <project>] [-v <vcs>] [-o <owner>] [-b <branch>]
 #
 
-TOKEN="$CIRCLECI_TOKEN"
+TOKEN="$(pony get circleci.personal.token)"
 
 while getopts ":t:p:v:o:b:d:" opt; do
   case $opt in
