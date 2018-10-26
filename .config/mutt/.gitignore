@@ -1,0 +1,6 @@
+*.swp
+*.gpg
+accounts/
+*.pyc
+thunderbird/
+autoconf/log

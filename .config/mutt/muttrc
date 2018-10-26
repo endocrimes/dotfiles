@@ -1,0 +1,116 @@
+# vim: filetype=neomuttrc
+# This is the general mutt config which has the settings that all accounts use.
+bind index,pager i noop
+bind index,pager g noop
+bind index \Cf noop
+source ~/.config/mutt/etc/muttcol
+source ~/.config/mutt/etc/aliases
+source ~/.config/mutt/etc/solarized-dark
+set sleep_time = 0
+set sort = 'reverse-date'
+set editor = $EDITOR
+#set copy = no
+set timeout = "5"
+set mail_check = "10"
+set mailcap_path = ~/.config/mutt/etc/mailcap
+set date_format="%m/%d %I:%M"
+set index_format="%2C %?X?A& ? %D %-15.15F %s (%-4.4c)"
+#set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
+set forward_format = "Fwd: %s"
+set markers = no
+set mark_old = no
+set mime_forward = yes
+set smtp_authenticators = 'gssapi:login'
+auto_view text/html
+auto_view application/pdf
+alternative_order text/plain text/enriched text/html
+
+# General remappings
+bind editor <space> noop
+bind index G last-entry
+bind index gg first-entry
+bind pager j next-line
+bind pager k previous-line
+bind attach,index,pager \CD next-page
+bind attach,index,pager \CU previous-page
+bind pager gg top
+bind pager G bottom
+bind index d half-down
+bind index u half-up
+bind index D delete-message
+bind index U undelete-message
+bind index F search
+bind index,pager R group-reply
+macro index,pager S '<sync-mailbox>
+macro index,pager \Cu |urlview\n
+
+# View attachments properly.
+bind attach <return> view-mailcap
+set fast_reply           # skip to compose when replying
+set fcc_attach           # save attachments with the body
+unset mime_forward       # forward attachments as part of body
+set forward_format = "Fwd: %s"       # format of subject when forwarding
+set forward_decode                   # decode when forwarding
+set forward_quote                    # include message in forwards
+set reverse_name                     # reply as whomever it was to
+set include                          # include message in replies
+
+## Ctrl-r to mark all as read
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+
+## sync email
+macro index O "<shell-escape>offlineimap<enter>" "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
+
+## gpg
+set pgp_use_gpg_agent = yes
+set pgp_sign_as = 4B34C887
+set pgp_timeout = 3600
+set crypt_autosign = yes
+set pgp_decode_command="gpg %?p?--passphrase-fd 0? --no-verbose --batch --output - %f"
+set pgp_verify_command="gpg --no-verbose --batch --output - --verify %s %f"
+set pgp_decrypt_command="gpg --passphrase-fd 0 --no-verbose --batch --output - %f"
+set pgp_sign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --detach-sign --textmode %?a?-u %a? %f"
+set pgp_clearsign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --textmode --clearsign %?a?-u %a? %f"
+set pgp_encrypt_only_command="pgpewrap gpg --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust --encrypt-to 0xC9C40C31 -- -r %r -- %f"
+set pgp_encrypt_sign_command="pgpewrap gpg --passphrase-fd 0 --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust --encrypt-to 0xC9C40C31 -- -r %r -- %f"
+set pgp_import_command="gpg --no-verbose --import -v %f"
+set pgp_export_command="gpg --no-verbose --export --armor %r"
+set pgp_verify_key_command="gpg --no-verbose --batch --fingerprint --check-sigs %r"
+set pgp_list_pubring_command="gpg --no-verbose --batch --with-colons --list-keys %r"
+set pgp_list_secring_command="gpg --no-verbose --batch --with-colons --list-secret-keys %r"
+
+## Unsubscribe
+macro pager ,u \
+  "<enter-command>set my_old_pipe_decode=\$pipe_decode nopipe_decode<enter> \
+  <pipe-message>/usr/local/bin/ghu<enter> \
+  <enter-command>set pipe_decode=\$my_old_pipe_decode<enter>" \
+  "Unsubscribe from any email with a List-Unsubscribe header"
+
+macro pager ,o \
+  "<enter-command>set my_old_pipe_decode=\$pipe_decode nopipe_decode<enter> \
+  <pipe-message>/usr/local/bin/ghu --open<enter> \
+  <enter-command>set pipe_decode=\$my_old_pipe_decode<enter>" \
+  "Unsubscribe from any email with a List-Unsubscribe header"
+
+## copy/move dialogs
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+
+set folder = "~/.mail"
+
+mailboxes +personal/INBOX +circleci/INBOX
+folder-hook personal/* source ~/.config/mutt/accounts/personal.muttrc
+folder-hook circleci/* source ~/.config/mutt/accounts/circleci.muttrc
+
+macro index ic "<change-folder>+circleci/INBOX<enter>" "Go to circleci inbox"
+macro index ip "<change-folder>+personal/INBOX<enter>" "Go to personal inbox"
+
+set sig_dashes = no
+set signature = $HOME/.config/mutt/signature
+
+# requires: https://github.com/keith/contacts-cli
+set query_command="contacts '%s'"
+bind editor <Tab> complete-query
+
+source ~/.config/mutt/accounts/personal.muttrc
