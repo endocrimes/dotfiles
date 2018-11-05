@@ -24,8 +24,10 @@ install_brew gnupg2;
 install_brew git;
 install_brew hub;
 install_brew tmux;
+install_brew reattach-to-user-namespace;
 install_brew class-dump;
 install_brew shellcheck;
+install_brew htop;
 
 install_brew mutt;
 install_brew offlineimap;
@@ -37,4 +39,9 @@ install_brew dantoml/formulae/git-promote;
 
 install_cask font-inconsolata;
 install_cask font-fontawesome;
+install_cask font-fira-code;
 install_cask iterm2;
+install_cask 1password;
+install_cask slack;
+install_cask oracle-jdk;
+install_cask docker;
