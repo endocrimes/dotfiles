@@ -73,10 +73,9 @@ if [ -x "$(command -v swiftenv)" ]; then
   eval "$(swiftenv init -)"
 fi
 
-## ~/bin
+## ~/bin ~/.local/bin $GOPATH/bin
 export PATH="$HOME/bin:$PATH"
-
-
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
 
 export PONY_KEYID="2DF3678C4B34C887"
