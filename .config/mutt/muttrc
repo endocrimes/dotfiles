@@ -99,11 +99,13 @@ macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 
 set folder = "~/.mail"
 
-mailboxes +personal/INBOX +circleci/INBOX
+mailboxes +personal/INBOX +circleci/INBOX +hashicorp/INBOX
 folder-hook personal/* source ~/.config/mutt/accounts/personal.muttrc
 folder-hook circleci/* source ~/.config/mutt/accounts/circleci.muttrc
+folder-hook hashicorp/* source ~/.config/mutt/accounts/hashicorp.muttrc
 
 macro index ic "<change-folder>+circleci/INBOX<enter>" "Go to circleci inbox"
+macro index ih "<change-folder>+hashicorp/INBOX<enter>" "Go to hashicorp inbox"
 macro index ip "<change-folder>+personal/INBOX<enter>" "Go to personal inbox"
 
 set sig_dashes = no

@@ -1,0 +1,23 @@
+# vim: filetype=neomuttrc
+# muttrc file for account personal
+set realname = "Danielle Tomlinson"
+set from = "dani@tomlinson.io"
+set smtp_url = "smtp://dani@tomlinson.io@smtp.fastmail.com:587/"
+set sendmail = "/usr/bin/msmtp -a personal"
+set header_cache = ~/.config/mutt/accounts/personal/cache/headers
+set message_cachedir = ~/.config/mutt/accounts/personal/cache/bodies
+set certificate_file = ~/.config/mutt/accounts/personal/certificates
+source "~/.config/mutt/credentials/getmuttpass personal |"
+
+set mbox_type = Maildir
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+bind index,pager gg noop
+bind index,pager g noop
+bind index gg first-entry
+
+set spoolfile = "+personal/INBOX"
+set record = "+personal/Sent"
+set postponed = "+personal/Drafts"
+set trash = "+personal/Archive"

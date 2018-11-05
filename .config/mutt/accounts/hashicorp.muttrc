@@ -1,0 +1,23 @@
+# vim: filetype=neomuttrc
+# muttrc file for account hashicorp
+set realname = "Danielle Tomlinson"
+set from = "dani@hashicorp.com"
+set smtp_url = "smtp://dani@hashicorp.com@smtp.gmail.com:587/"
+set sendmail = "/usr/bin/msmtp -a hashicorp"
+set header_cache = ~/.config/mutt/accounts/hashicorp/cache/headers
+set message_cachedir = ~/.config/mutt/accounts/hashicorp/cache/bodies
+set certificate_file = ~/.config/mutt/accounts/hashicorp/certificates
+source "~/.config/mutt/credentials/getmuttpass hashicorp |"
+
+set mbox_type = Maildir
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+bind index,pager gg noop
+bind index,pager g noop
+bind index gg first-entry
+
+set spoolfile = "+hashicorp/INBOX"
+set record = "+hashicorp/SENT"
+set postponed = "+hashicorp/Drafts"
+set trash = "+hashicorp/Archive"
