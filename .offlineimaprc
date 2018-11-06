@@ -1,0 +1,49 @@
+[general]
+accounts = personal, hashicorp
+starttls = yes
+ssl = true
+pythonfile = ~/.config/mutt/credentials/imappwd.py
+
+[Account personal]
+
+localrepository = tomlinson.io-local
+remoterepository = tomlinson.io-remote
+
+[Repository tomlinson.io-remote]
+auth_mechanisms = LOGIN
+type = IMAP
+remoteuser = dani@tomlinson.io
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+remotepasseval = mailpasswd("personal")
+remotehost = imap.fastmail.com
+remoteport = 993
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+realdelete = no
+maxconnections = 5
+folderfilter = lambda folder: folder not in ['Trash', 'Archive']
+
+[Repository tomlinson.io-local]
+type = Maildir
+localfolders = ~/.mail/personal
+
+[Account hashicorp]
+
+localrepository = hashicorp-local
+remoterepository = hashicorp-remote
+
+[Repository hashicorp-remote]
+auth_mechanisms = LOGIN
+type = IMAP
+remoteuser = dani@hashicorp.com
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+remotepasseval = mailpasswd("hashicorp")
+remotehost = imap.gmail.com
+remoteport = 993
+realdelete = no
+maxconnections = 10
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+folderfilter = lambda folder: folder not in ['Trash']
+
+[Repository hashicorp-local]
+type = Maildir
+localfolders = ~/.mail/hashicorp
