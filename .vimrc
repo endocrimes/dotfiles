@@ -4,7 +4,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 
-Plug 'aklt/plantuml-syntax'
+"" Vim Language Server support
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+
+"" Autocomplete
+Plug 'tpope/vim-endwise'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 "" Useful tools
 Plug 'tpope/vim-commentary'
@@ -30,14 +37,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
 
-"" GitHub
-Plug 'keith/gist.vim'
-
-"" Autocomplete
-Plug 'tpope/vim-endwise'
-Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe'
-
 "" Clojure
 Plug 'guns/vim-clojure-static'
 Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
@@ -54,23 +53,25 @@ Plug 'hashivim/vim-hashicorp-tools'
 "" Markdown
 Plug 'plasticboy/vim-markdown'
 
-"" This is the saddest thing i ever added
+"" Powershell: This is the saddest thing i ever added
 Plug 'PProvost/vim-ps1'
 
 "" Golang
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'for': 'go' }
 
 "" Python
 Plug 'vim-scripts/indentpython.vim', { 'for': 'python' }
 Plug 'nvie/vim-flake8', { 'for': 'python' }
 
 "" Ruby
-Plug 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'tpope/vim-rake'
 
 "" Other
 Plug 'keith/swift.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'aklt/plantuml-syntax'
+
 call plug#end()
 
 set nocompatible " required (to be iMproved)
@@ -195,8 +196,6 @@ map <Down> gj
 map k gk
 map j gj
 
-"" Mousing
-
 "" Testing
 let test#strategy = "vimux"
 nmap <silent> <leader>t :TestNearest<CR>
@@ -220,9 +219,6 @@ nnoremap <Leader>m :make<CR>
 " NERDTree configuration
 let g:NERDTreeShowHidden=1
 noremap <Leader>3 :NERDTreeToggle<CR>
-
-"" Python
-let python_highlight_all=1
 
 " Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
@@ -264,6 +260,89 @@ else
 endif
 
 "
+" Language Server Protocols
+"
+
+"" Bash: https://github.com/mads-hartmann/bash-language-server
+if executable('bash-language-server')
+  augroup LspGo
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'bash-language-server',
+          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+          \ 'whitelist': ['sh', 'bash'],
+          \ })
+    autocmd FileType sh setlocal omnifunc=lsp#complete
+    autocmd FileType bash setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
+"" Golang: go get -u golang.org/x/tools/cmd/golsp
+if executable('golsp')
+  augroup LspGo
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'go',
+        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
+"" Clojure: https://github.com/snoe/clojure-lsp
+if executable('clojure-lsp')
+  augroup LspClojure
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'clojure-language-server',
+          \ 'cmd': {server_info->['clojure-lsp']},
+          \ 'whitelist': ['clojure'],
+          \ })
+    autocmd FileType clojure setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
+"" Rust: rustup component add rls-preview rust-analysis rust-src
+if executable('rls')
+  augroup LspRust
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'rls',
+          \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+          \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'Cargo.toml'))},
+          \ 'whitelist': ['rust'],
+          \ })
+    autocmd FileType rust setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
+"" Ruby: gem install solargraph
+if executable('solargraph')
+  augroup LspRuby
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'solargraph',
+          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+          \ 'initialization_options': {"diagnostics": "true"},
+          \ 'whitelist': ['ruby'],
+          \ })
+    autocmd FileType ruby setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+let g:asyncomplete_remove_duplicates = 1
+
+"
+" Python
+"
+let python_highlight_all=1
+
+"
 " Clojure
 "
 
@@ -286,14 +365,7 @@ let g:go_highlight_build_constraints = 1
 
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "goimports"
-let g:go_fmt_options = {
-  \ 'goimports': '-local do/',
-  \ }
-
-let g:go_def_mode = "guru"
-let g:go_echo_command_info = 1
-let g:go_gocode_autobuild = 1
-let g:go_gocode_unimported_packages = 1
+let g:go_def_mode = "godef"
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -306,7 +378,7 @@ function! s:build_go_files()
 endfunction
 
 " Automatically lookup info
-set updatetime=100
+" set updatetime=100 disabled because gocode/guru are borked rn
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 
