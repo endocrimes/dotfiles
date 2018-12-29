@@ -37,11 +37,18 @@ install_brew mpv; # Notifications from mutt
 install_brew dantoml/formulae/git-cleanup;
 install_brew dantoml/formulae/git-promote;
 
+# Software I run to make life good
+install_cask 1password;
+install_cask spotify;
+install_cask alfred;
+install_cask conductor; # (window manager)
+
+# Required Development Casks
 install_cask font-inconsolata;
 install_cask font-fontawesome;
 install_cask font-fira-code;
 install_cask iterm2;
-install_cask 1password;
 install_cask slack;
 install_cask oracle-jdk;
 install_cask docker;
+
