@@ -25,3 +25,4 @@ Session.vim
 
 # Bundler
 .bundle
+.idea/
