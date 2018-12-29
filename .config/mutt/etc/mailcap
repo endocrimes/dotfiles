@@ -1,3 +1,3 @@
-text/html; w3m -I %{charset} -T text/html; copiousoutput;
+text/html; w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
 application/pdf; mv %s %s.pdf && i3 exec mupdf %s.pdf > /dev/null; needsterminal;
 text/plain; vim %s;
