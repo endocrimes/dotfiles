@@ -30,20 +30,9 @@ fi
 # Command Alias
 #
 
-function hexe() {
-  HEXE_BIN="$HOME/development/hexe/hexe"
-  if [[ -n $1 ]]; then
-    exec "$HEXE_BIN" "$1"
-  else
-    "$HEXE_BIN"
-  fi
-}
-
-
-function proj() {
-  if [[ -x "$HOME/bin/_proj" ]]; then
-    exec _proj $1
-  fi
+# Fast project switching in a gopath.
+goz() {
+  cd $(find $GOPATH/src -maxdepth 3 -type d | fzf)
 }
 
 ## Load Configs
