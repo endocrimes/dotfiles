@@ -7,7 +7,15 @@ source ~/.config/mutt/etc/muttcol
 source ~/.config/mutt/etc/aliases
 source ~/.config/mutt/etc/solarized-dark
 set sleep_time = 0
-set sort = 'reverse-date'
+
+set sort="threads"
+set strict_threads="yes"
+set sort_browser = 'reverse-date'
+set sort_aux="reverse-date"
+unset collapse_unread
+bind index - collapse-thread
+bind index _ collapse-all
+
 set editor = $EDITOR
 #set copy = no
 set timeout = "5"
