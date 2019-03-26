@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+name="work"
+
+# Cleanup
+tmux kill-session -t $name
+pkill -9 nomad
+pkill -9 consul
+pkill -9 vault
+
+tmux -2 new-session -d -s $name
+
+# Window 1; Development
+tmux rename-window -t $name:1 'dev'
+tmux send-keys -R -t $name:1 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+tmux send-keys -R -t $name:1 "vim" C-m
+tmux split-window -v -p 10
+tmux send-keys -R -t $name:1 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+tmux send-keys -R -t $name:1 "clear" C-m
+
+# Window 2; Testing
+tmux new-window -t $name:2 -n 'test'
+tmux send-keys -R -t $name:2 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+tmux send-keys -R -t $name:2 "clear" C-m
+tmux split-window -h
+tmux send-keys -R -t $name:2 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+tmux send-keys -R -t $name:2 "clear" C-m
+tmux send-keys -R -t $name:2 "nomad agent -dev" C-m
+tmux split-window -v
+tmux send-keys -R -t $name:2 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+tmux send-keys -R -t $name:2 "clear" C-m
+tmux send-keys -R -t $name:2 "nomad status" C-m
+
+# Window 3; Consul/Vault Daemons
+tmux new-window -t $name:3 -n 'daemons'
+tmux send-keys -R -t $name:3 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+tmux send-keys -R -t $name:3 "clear" C-m
+tmux split-window -h
+tmux send-keys -R -t $name:3 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+tmux send-keys -R -t $name:3 "vault server -dev" C-m
+tmux split-window -v
+tmux send-keys -R -t $name:3 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+tmux send-keys -R -t $name:3 "consul agent -dev" C-m
+
+# Window 4; Email, switch to hashicorp email (ih) and refresh inbox (o)
+tmux new-window -t $name:4 -n 'mutt'
+tmux send-keys -R -t $name:4 "mutt" C-m
+tmux send-keys -R -t $name:4 "ih"
+tmux send-keys -R -t $name:4 "o"
+tmux send-keys -R -t $name:4 Enter
+
+# Set default window
+tmux select-window -t "$name:1"
+tmux select-pane -t "$name:1.1"
+
+# Attach to session
+exec tmux -2 attach-session -t $name
