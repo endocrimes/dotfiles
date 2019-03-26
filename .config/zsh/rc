@@ -69,3 +69,11 @@ export PATH="$PATH:$GOPATH/bin"
 
 export PONY_KEYID="2DF3678C4B34C887"
 
+
+## Fix keybindings
+# zsh introspects the EDITOR env var and automatically enables vi-bindings if
+# the editor contains `vi`. These bindings are kinda weird and broken when going
+# back into insert mode, so here we force emacs style bindings for compatibility
+# with remote servers too.
+bindkey -e
+
