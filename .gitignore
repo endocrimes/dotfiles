@@ -1,28 +1,3 @@
-# Vim
-.*.sw[a-z]
-*.un~
-Session.vim
+*
+!.config/*
 
-# OS X
-.DS_Store
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-**/*history*
-
-# .config
-.config/robomongo
-.config/**/*.bkp
-
-# Xcode
-*.xcuserdatad
-*.xccheckout
-
-# Bundler
-.bundle
-.idea/
