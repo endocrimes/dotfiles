@@ -3,7 +3,7 @@
     email = dani@tomlinson.io
     signingkey = 4B34C887
 [core]
-    excludesfile = ~/.gitignore
+    excludesfile = ~/.config/git/gitignore
 [mergetool]
     keepBackup = false
     prompt = false
