@@ -1,7 +1,7 @@
 # vim: filetype=neomuttrc
 # muttrc file for account personal
-set realname = "Danielle Tomlinson"
-set from = "dani@tomlinson.io"
+set realname = "Danielle Lancashire"
+set from = "dani@builds.terrible.systems"
 set sendmail = "/usr/local/bin/msmtp -a personal"
 set header_cache = ~/.config/mutt/accounts/personal/cache/headers
 set message_cachedir = ~/.config/mutt/accounts/personal/cache/bodies

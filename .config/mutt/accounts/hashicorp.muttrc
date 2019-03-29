@@ -1,6 +1,6 @@
 # vim: filetype=neomuttrc
 # muttrc file for account hashicorp
-set realname = "Danielle Tomlinson"
+set realname = "Danielle Lancashire"
 set from = "dani@hashicorp.com"
 set sendmail = "/usr/local/bin/msmtp -a hashicorp"
 set header_cache = ~/.config/mutt/accounts/hashicorp/cache/headers
