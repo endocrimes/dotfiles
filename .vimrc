@@ -5,14 +5,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 
 "" Vim Language Server support
+Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 "" Autocomplete
 Plug 'tpope/vim-endwise'
 Plug 'ervandew/supertab'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 "" Useful tools
 Plug 'tpope/vim-commentary'
@@ -38,17 +38,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
 
-"" Clojure
-Plug 'guns/vim-clojure-static'
-Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }
-Plug 'vim-scripts/paredit.vim', { 'for': 'clojure' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
 "" Help I accidentally an ops
-Plug 'hashivim/vim-terraform', { 'for': 'hcl' }
 Plug 'juliosueiras/vim-terraform-completion', { 'for': 'hcl' }
 Plug 'fatih/vim-hclfmt'
-Plug 'fatih/vim-nginx' , {'for' : 'nginx'}
 Plug 'hashivim/vim-hashicorp-tools'
 
 "" Markdown
@@ -69,10 +61,8 @@ Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'tpope/vim-rake'
 
 "" Other
-Plug 'keith/swift.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'aklt/plantuml-syntax'
-
 call plug#end()
 
 set nocompatible " required (to be iMproved)
@@ -107,6 +97,8 @@ set shiftwidth=2              " As above
 set expandtab                 " Expand tabs into spaces
 
 set mouse=a
+set ttymouse=sgr              " Fix mouse clicks after 220th column. Vim without
+                              "  mouse_sgr should be considered broken.
 set laststatus=2              " Airline, Required to work without splits.
 
 set gcr=a:blinkon0            " Disable the blinking cursor.
@@ -134,51 +126,6 @@ augroup numberwang
   autocmd InsertLeave,BufNewFile,VimEnter * silent! :set relativenumber
 augroup END
 
-" Rainbow parens for Clojure
-
-let g:rbpt_max = 15
-
-augroup filetype_clojure
-  autocmd!
-  autocmd Filetype clojure RainbowParenthesesActivate
-  autocmd Syntax clojure RainbowParenthesesLoadRound
-  autocmd Filetype clojurescript RainbowParenthesesActivate
-  autocmd Syntax clojurescript RainbowParenthesesLoadRound
-augroup END
-
-if has("termguicolors")
-  set termguicolors
-  set background=dark
-  colorscheme fairyfloss
-  let g:rbpt_colorpairs = [
-        \ ['brown',    '#a8a4b1'],
-        \ ['Darkblue',    '#c5a3ff'],
-        \ ['darkgray',    '#a8a4b1'],
-        \ ]
-else
-  set background=dark
-  colorscheme solarized
-  call togglebg#map("<F5>")
-  " Remove Black Parens
-  let g:rbpt_colorpairs = [
-        \ ['brown',       'RoyalBlue3'],
-        \ ['Darkblue',    'SeaGreen3'],
-        \ ['darkgray',    'DarkOrchid3'],
-        \ ['darkgreen',   'firebrick3'],
-        \ ['darkcyan',    'RoyalBlue3'],
-        \ ['darkred',     'SeaGreen3'],
-        \ ['darkmagenta', 'DarkOrchid3'],
-        \ ['brown',       'firebrick3'],
-        \ ['gray',        'RoyalBlue3'],
-        \ ['darkmagenta', 'DarkOrchid3'],
-        \ ['Darkblue',    'firebrick3'],
-        \ ['darkgreen',   'RoyalBlue3'],
-        \ ['darkcyan',    'SeaGreen3'],
-        \ ['darkred',     'DarkOrchid3'],
-        \ ['red',         'firebrick3'],
-        \ ]
-endif
-
 if has("gui_running")
   set guifont=Fira\ Code\ Retina:h14
 else
@@ -187,6 +134,24 @@ else
     " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
     set t_ut=
 endif
+
+if has("termguicolors")
+  set termguicolors
+  set background=dark
+  colorscheme fairyfloss
+else
+  set background=dark
+  colorscheme solarized
+  call togglebg#map("<F5>")
+endif
+
+"" Configure Supertab lookup chain
+
+autocmd FileType *
+  \ if &omnifunc != '' |
+  \   call SuperTabChain(&omnifunc, "<c-p>") |
+  \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+  \ endif
 
 "" Save
 nmap <leader>w :w!<cr>
@@ -265,46 +230,33 @@ endif
 "
 
 "" Bash: https://github.com/mads-hartmann/bash-language-server
-if executable('bash-language-server')
-  augroup LspGo
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'bash-language-server',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
-          \ 'whitelist': ['sh', 'bash'],
-          \ })
-    autocmd FileType sh setlocal omnifunc=lsp#complete
-    autocmd FileType bash setlocal omnifunc=lsp#complete
-  augroup END
-endif
+" if executable('bash-language-server')
+"   augroup LspBash
+"     au!
+"     autocmd User lsp_setup call lsp#register_server({
+"           \ 'name': 'bash-language-server',
+"           \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+"           \ 'whitelist': ['sh', 'bash'],
+"           \ })
+"     autocmd FileType sh setlocal omnifunc=lsp#complete
+"     autocmd FileType bash setlocal omnifunc=lsp#complete
+"   augroup END
+" endif
 
 "" Golang: go get -u golang.org/x/tools/cmd/golsp
-if executable('golsp')
-  augroup LspGo
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'go',
-        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
-  augroup END
-endif
+" if executable('gopls')
+"   augroup LspGo
+"     au!
+"     autocmd User lsp_setup call lsp#register_server({
+"         \ 'name': 'go',
+"         \ 'cmd': {server_info->['golsp']},
+"         \ 'whitelist': ['go'],
+"         \ })
+"     autocmd FileType go setlocal omnifunc=lsp#complete
+"   augroup END
+" endif
 
-"" Clojure: https://github.com/snoe/clojure-lsp
-if executable('clojure-lsp')
-  augroup LspClojure
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'clojure-language-server',
-          \ 'cmd': {server_info->['clojure-lsp']},
-          \ 'whitelist': ['clojure'],
-          \ })
-    autocmd FileType clojure setlocal omnifunc=lsp#complete
-  augroup END
-endif
-
-"" Rust: rustup component add rls-preview rust-analysis rust-src
+" Rust: rustup component add rls-preview rust-analysis rust-src
 if executable('rls')
   augroup LspRust
     au!
@@ -332,29 +284,8 @@ if executable('solargraph')
   augroup END
 endif
 
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-imap <c-space> <Plug>(asyncomplete_force_refresh)
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ asyncomplete#force_refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-augroup Asyncomplete
-  au!
-  autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
-augroup END
-
-let g:asyncomplete_remove_duplicates = 1
+nmap <Leader>ds <Plug>(lsp-definition)
+nmap <Leader>dt <Plug>(lsp-type-definition)
 
 "
 " Python
@@ -371,6 +302,8 @@ autocmd BufNewFile,BufRead *.cljx setlocal filetype=clojure
 
 autocmd FileType clojure nmap <Leader>t :RunTests<CR>
 
+let g:ale_linters = {'go': ['golint', 'govet', 'errcheck']}
+
 "
 " Go
 "
@@ -383,8 +316,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
 let g:go_fmt_fail_silently = 1
-let g:go_fmt_command = "goimports"
-let g:go_def_mode = "godef"
+let g:go_fmt_command = "gofmt"
+let g:go_def_mode = "gopls"
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -397,11 +330,9 @@ function! s:build_go_files()
 endfunction
 
 " Automatically lookup info
-" set updatetime=100 disabled because gocode/guru are borked rn
+set updatetime=100
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
-
-let g:ale_linters = {'go': ['golint', 'govet', 'errcheck']}
 
 augroup filetype_go
   autocmd!
@@ -412,11 +343,13 @@ augroup filetype_go
   autocmd FileType go nmap <silent> <Leader>c <Plug>(go-coverage-toggle)
 
   " Look ups and documentation
-  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
   autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
   autocmd FileType go nmap <Leader>dv <Plug>(go-doc-vertical)
+  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
   autocmd FileType go nmap <silent> <Leader>i <Plug>(go-info)
   autocmd FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
+
+  autocmd FileType go setlocal omnifunc=go#complete#Complete
 augroup END
 
 "
@@ -444,3 +377,5 @@ autocmd BufNewFile,BufRead Dockerfile.dev* setlocal filetype=dockerfile
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_fenced_languages = ['go=go', 'viml=vim', 'bash=sh']
 let g:vim_markdown_new_list_item_indent = 2
+au BufRead,BufNewFile *.md setlocal textwidth=80
+au BufRead,BufNewFile *.md* setlocal textwidth=80
