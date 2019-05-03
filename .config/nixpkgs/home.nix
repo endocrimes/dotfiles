@@ -14,15 +14,31 @@
     mtr
     htop
     kitty
+    redshift
+    fzf
+    gnome3.gnome-screenshot
 
     # Work stuff
+    gitAndTools.hub
     go
+    slack
+    zoom-us
+    consul
+    vault
+
+    # rustup -- installed manually because I can't get hm to install 1.17
+    autoconf
+   #  gcc
+    binutils.bintools
+
+    # Chat
+    signal-desktop
+    quasselClient
 
     # Entertainment
     spotify
     vlc
   ];
-
   programs.firefox = {
     enable = true;
     enableIcedTea = true;
@@ -31,3 +47,4 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
+
