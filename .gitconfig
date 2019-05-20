@@ -59,4 +59,6 @@
 [commit]
 # 	gpgsign = true
 [mailmap]
-  file = /Users/danielle/.mailmap
+  file = ~/.mailmap
+[log]
+	mailmap = true
