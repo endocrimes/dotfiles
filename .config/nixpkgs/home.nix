@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
-{
+let unstable = import <unstable> {};
+in {
   home.packages = with pkgs; [
     # Required for a good computing experience
     ## Important for clipboard support
@@ -17,6 +18,7 @@
     redshift
     fzf
     gnome3.gnome-screenshot
+    python27
 
     # Work stuff
     gitAndTools.hub
@@ -25,10 +27,11 @@
     zoom-us
     consul
     vault
+    freerdp # sadly, windows.
 
     # rustup -- installed manually because I can't get hm to install 1.17
     autoconf
-   #  gcc
+    # gcc
     binutils.bintools
 
     # Chat
@@ -38,7 +41,21 @@
     # Entertainment
     spotify
     vlc
+
+    # Photography & Images
+    darktable
+    inkscape
+
+    # Make things pretty!
+    pywal
+    polybar
+    rofi
+    unstable.siji
+    unifont
+    jsoncpp
+    # nerdfonts
   ];
+
   programs.firefox = {
     enable = true;
     enableIcedTea = true;
