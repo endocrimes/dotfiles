@@ -15,7 +15,7 @@ floating_modifier $mod
 bindsym $mod+Return exec kitty
 
 # lock the system
-bindsym $mod+Mod4+l exec i3lock
+bindsym $mod+Mod4+l exec $HOME/.config/i3/lock.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -166,5 +166,5 @@ bindsym $mod+r mode "resize"
 #
 exec_always --no-startup-id $HOME/.config/i3/polybar.sh
 
-default_border pixel 3
+default_border pixel 2
 client.focused #4c7899 #285577 #ffffff #F73E5F #666666
