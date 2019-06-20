@@ -19,6 +19,8 @@ in {
     fzf
     gnome3.gnome-screenshot
     python27
+    ripgrep
+    gnupg
 
     # Work stuff
     gitAndTools.hub
@@ -27,9 +29,9 @@ in {
     zoom-us
     consul
     vault
-    freerdp # sadly, windows.
+    remmina # sadly, windows.
 
-    # rustup -- installed manually because I can't get hm to install 1.17
+    rustup
     autoconf
     # gcc
     binutils.bintools
@@ -37,10 +39,13 @@ in {
     # Chat
     signal-desktop
     quasselClient
+    keybase
+    keybase-gui
 
     # Entertainment
     spotify
     vlc
+    playerctl
 
     # Photography & Images
     darktable
@@ -53,7 +58,7 @@ in {
     unstable.siji
     unifont
     jsoncpp
-    # nerdfonts
+    nerdfonts
   ];
 
   programs.firefox = {
