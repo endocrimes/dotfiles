@@ -1,8 +1,9 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
+exec_always --no-startup-id "xrandr --output eDP1 --mode 2560x1440 --auto --dpi 144"
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -15,7 +16,7 @@ floating_modifier $mod
 bindsym $mod+Return exec kitty
 
 # lock the system
-bindsym $mod+Mod4+l exec $HOME/.config/i3/lock.sh
+bindsym $mod+Mod1+l exec $HOME/.config/i3/lock.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
