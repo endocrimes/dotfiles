@@ -24,12 +24,14 @@ then
   ioreg -p IOUSB | grep Yubikey >/dev/null || exit
 fi
 
+notify_folders="inbox"
+
 # Get current number of new mail, then begin sync.
-ori=$(find ~/.mail -wholename '*/new/*' | grep -cvi "spam\|trash\|junk")
-offlineimap -o "$@"
+ori=$(find ~/.mail -wholename '*/new/*' | grep -ci "$notify_folders")
+offlineimap -a personal -o "$@"
 
 # Recount new mail.
-new=$(find ~/.mail -wholename '*/new/*' | grep -cvi "spam\|trash\|junk")
+new=$(find ~/.mail -wholename '*/new/*' | grep -ci "$notify_folders")
 
 # If new mail has grown, play a notification.
 if [ "$new" -gt "$ori" ]; then
