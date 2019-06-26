@@ -58,8 +58,8 @@
 [push]
     default = simple
 [commit]
-   	gpgsign = true
+    gpgsign = true
 [mailmap]
-  file = ~/.config/git/mailmap
+    file = ~/.config/git/mailmap
 [log]
-	mailmap = true
+	  mailmap = true
