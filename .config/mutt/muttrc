@@ -21,8 +21,8 @@ set editor = $EDITOR
 set timeout = "5"
 set mail_check = "10"
 set mailcap_path = ~/.config/mutt/etc/mailcap
-set date_format="%m/%d %I:%M"
-set index_format="%2C %?X?A& ? %D %-15.15F %s (%-4.4c)"
+set date_format="%d/%m %H:%M"
+set index_format="%2C %?X?A& ? %D %-14.15F %s (%-4.4c)"
 set forward_format = "Fwd: %s"
 set markers = no
 set mark_old = no
@@ -71,7 +71,7 @@ macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to s
 
 ## gpg
 set pgp_use_gpg_agent = yes
-set pgp_sign_as = 4B34C887
+set pgp_sign_as = F3DDF91B
 set pgp_timeout = 3600
 set crypt_autosign = yes
 set pgp_decode_command="gpg %?p?--passphrase-fd 0? --no-verbose --batch --output - %f"
