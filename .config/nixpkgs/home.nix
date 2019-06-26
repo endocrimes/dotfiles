@@ -21,6 +21,13 @@ in {
     python27
     ripgrep
     gnupg
+    pinentry
+
+    # email
+    msmtp
+    neomutt
+    offlineimap
+    sendmail
 
     # Work stuff
     gitAndTools.hub
@@ -46,6 +53,7 @@ in {
     spotify
     vlc
     playerctl
+    mpv
 
     # Photography & Images
     darktable
@@ -58,7 +66,6 @@ in {
     unstable.siji
     unifont
     jsoncpp
-    nerdfonts
   ];
 
   programs.firefox = {
