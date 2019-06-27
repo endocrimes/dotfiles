@@ -27,7 +27,6 @@ in {
     msmtp
     neomutt
     offlineimap
-    sendmail
 
     # Work stuff
     gitAndTools.hub
@@ -66,6 +65,9 @@ in {
     unstable.siji
     unifont
     jsoncpp
+
+    # Fake Gamer Girl
+    steam
   ];
 
   programs.firefox = {
