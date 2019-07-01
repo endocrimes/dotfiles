@@ -2,17 +2,22 @@
 
 let unstable = import <unstable> {};
 in {
+  programs.firefox = {
+    enable = true;
+    enableIcedTea = true;
+  };
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+
   home.packages = with pkgs; [
     # Required for a good computing experience
-    ## Important for clipboard support
-    vim_configurable
+    vim_configurable ## Important for clipboard support
     zsh
     fira-code
     jq
     tmux
     gnumake
-    dnsutils.dnsutils
-    mtr
     htop
     kitty
     redshift
@@ -36,11 +41,6 @@ in {
     consul
     vault
     remmina # sadly, windows.
-
-    rustup
-    autoconf
-    # gcc
-    binutils.bintools
 
     # Chat
     signal-desktop
@@ -68,14 +68,18 @@ in {
 
     # Fake Gamer Girl
     steam
+
+    # Networking
+    dnsutils.dnsutils
+    mtr
+
+    # Rust (and some C things ;_;) <3
+    rustup
+    autoconf
+    gcc9
+    gcc9Stdenv
+    binutils
+    patchelf
   ];
-
-  programs.firefox = {
-    enable = true;
-    enableIcedTea = true;
-  };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 }
 
