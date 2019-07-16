@@ -4,7 +4,6 @@ let unstable = import <unstable> {};
 in {
   programs.firefox = {
     enable = true;
-    enableIcedTea = true;
   };
 
   # Let Home Manager install and manage itself.
@@ -35,7 +34,7 @@ in {
 
     # Work stuff
     gitAndTools.hub
-    go
+    unstable.go
     slack
     zoom-us
     consul
@@ -80,6 +79,17 @@ in {
     gcc9Stdenv
     binutils
     patchelf
+
+    # xclip. why.
+    xclip
+
+    # ugh
+    arduino
+    arduino-mk
+
+    libreoffice
+    vscode
+    platformio
   ];
 }
 
