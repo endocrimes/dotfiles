@@ -1,17 +1,15 @@
 { config, pkgs, ... }:
 
-let unstable = import <unstable> {};
+let unstable = import <unstable> { };
 in {
-  programs.firefox = {
-    enable = true;
-  };
+  programs.firefox = { enable = true; };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
     # Required for a good computing experience
-    vim_configurable ## Important for clipboard support
+    vim_configurable # Important for clipboard support
     zsh
     fira-code
     jq
