@@ -34,7 +34,6 @@ in {
 
     # Work stuff
     gitAndTools.hub
-    unstable.go
     slack
     zoom-us
     consul
@@ -91,5 +90,11 @@ in {
     vscode
     platformio
   ];
+
+  programs.go = {
+    enable = true;
+    package = unstable.go;
+    goPath = "dev";
+  };
 }
 
