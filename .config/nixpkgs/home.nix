@@ -1,8 +1,12 @@
 { config, pkgs, ... }:
 
 let unstable = import <unstable> { };
+    endopkgs = import <endopkgs> { };
 in {
-  programs.firefox = { enable = true; };
+  programs.firefox = {
+    enable = true;
+    package = unstable.firefox-unwrapped;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -85,8 +89,12 @@ in {
     arduino-mk
 
     libreoffice
-    vscode
     platformio
+
+    gimp
+
+    endopkgs.hclfmt
+    unstable.skype
   ];
 
   programs.go = {
@@ -94,5 +102,6 @@ in {
     package = unstable.go;
     goPath = "dev";
   };
+
 }
 
