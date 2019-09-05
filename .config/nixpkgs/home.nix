@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ stdenv, config, pkgs, ... }:
 
 let unstable = import <unstable> { };
     endopkgs = import <endopkgs> { };
@@ -28,6 +28,9 @@ in {
     ripgrep
     gnupg
     pinentry
+    elixir
+    awscli
+    lsof
 
     # email
     msmtp
@@ -41,6 +44,7 @@ in {
     consul
     vault
     remmina # sadly, windows.
+    packer
 
     # Chat
     signal-desktop
@@ -72,6 +76,7 @@ in {
     # Networking
     dnsutils.dnsutils
     mtr
+    telnet
 
     # Rust (and some C things ;_;) <3
     rustup
@@ -95,6 +100,10 @@ in {
 
     endopkgs.hclfmt
     unstable.skype
+
+    syncthing
+
+    unzip
   ];
 
   programs.go = {
@@ -103,5 +112,10 @@ in {
     goPath = "dev";
   };
 
+  systemd.user.startServices = true;
+
+  services.syncthing = {
+    enable = true;
+  };
 }
 
