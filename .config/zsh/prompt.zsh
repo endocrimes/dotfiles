@@ -16,7 +16,8 @@ function __aws_prompt() {
 }
 
 function __directory_prompt() {
-  echo $(basename `pwd`)
+  local wd="$(pwd)"
+  echo $(basename "$wd")
 }
 
 function __machine_info() {
