@@ -27,11 +27,19 @@ in {
     gimp
 
     syncthing
+
+    keybase-gui
   ];
 
   systemd.user.startServices = true;
 
   services.syncthing = {
+    enable = true;
+  };
+
+  services.keybase.enable = true;
+
+  services.kbfs = {
     enable = true;
   };
 }
