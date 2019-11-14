@@ -8,6 +8,7 @@ in {
    ./modules/workstation
    ./modules/workworkwork
    ./modules/email
+   ./modules/games/light
   ];
 
   programs.firefox = {
