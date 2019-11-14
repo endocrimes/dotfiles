@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 name="work"
 
 # Cleanup
@@ -9,6 +11,8 @@ pkill -9 consul
 pkill -9 vault
 
 tmux -2 new-session -d -s $name
+
+sleep 1
 
 # Window 1; Development
 tmux rename-window -t $name:1 'dev'
@@ -42,11 +46,10 @@ tmux split-window -v
 tmux send-keys -R -t $name:3 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
 tmux send-keys -R -t $name:3 "consul agent -dev" C-m
 
-# Window 4; Email, switch to hashicorp email (ih) and refresh inbox (o)
+# Window 4; Email, refresh all (O)
 tmux new-window -t $name:4 -n 'mutt'
 tmux send-keys -R -t $name:4 "mutt" C-m
-tmux send-keys -R -t $name:4 "ih"
-tmux send-keys -R -t $name:4 "o"
+tmux send-keys -R -t $name:4 "O"
 tmux send-keys -R -t $name:4 Enter
 
 # Set default window
