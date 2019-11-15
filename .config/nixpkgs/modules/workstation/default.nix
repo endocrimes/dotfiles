@@ -7,6 +7,7 @@
     ./chat
     ./terminal
     ./entertainment
+    ./wm
   ];
 
   home.packages = with pkgs; [
@@ -15,17 +16,8 @@
     inkscape
     gimp
 
-    # Make things pretty!
-    pywal
-    polybar
-    rofi
-    jsoncpp
-
     # Fake Gamer Girl
     steam
-
-    redshift
-    gnome3.gnome-screenshot
 
     # xclip. why.
     xclip
