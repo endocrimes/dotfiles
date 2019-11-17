@@ -8,5 +8,6 @@
     unzip
     lsof
     zsh
+    lm_sensors
   ];
 }
