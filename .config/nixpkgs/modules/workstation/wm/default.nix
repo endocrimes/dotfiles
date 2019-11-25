@@ -16,8 +16,15 @@
    enable = true;
    config = ./polybar.conf;
    script = lib.mkDefault ''
-   wal -R
-   polybar default &
+   ${pkgs.pywal}/bin/wal -R
+   # HACK: Cut is unavailable in the path so we do some sad indirection bc i'm
+   #       too lazy to figure out which packages i need. excuse the horrible
+   #       double shell too.
+   export PATH="/var/run/current-system/sw/bin:$PATH"
+   MONITORS=$(bash -c "polybar --list-monitors | cut -d ':' -f 1")
+   for m in $MONITORS; do
+     MONITOR=$m polybar default &
+   done
    '';
  };
 }
