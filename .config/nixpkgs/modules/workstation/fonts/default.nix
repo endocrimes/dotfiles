@@ -6,5 +6,6 @@ in {
     fira-code
     unstable.siji
     unifont
+    fantasque-sans-mono
   ];
 }

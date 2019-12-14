@@ -16,7 +16,6 @@
    enable = true;
    config = ./polybar.conf;
    script = lib.mkDefault ''
-   ${pkgs.pywal}/bin/wal -R
    # HACK: Cut is unavailable in the path so we do some sad indirection bc i'm
    #       too lazy to figure out which packages i need. excuse the horrible
    #       double shell too.
