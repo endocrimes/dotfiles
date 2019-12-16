@@ -2,6 +2,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 exec_always --no-startup-id "xrandr --output eDP1 --mode 2560x1440 --auto --dpi 144"
+exec_always --no-startup-id "systemctl --user restart polybar"
 
 set $mod Mod4
 
@@ -126,6 +127,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# restart polybar
+bindsym $mod+Shift+p exec "systemctl --user restart polybar"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
