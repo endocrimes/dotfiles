@@ -13,11 +13,11 @@ remoterepository = tomlinson.io-remote
 auth_mechanisms = LOGIN
 type = IMAP
 remoteuser = dani@tomlinson.io
-sslcacertfile = /usr/local/etc/openssl/cert.pem
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 remotepasseval = get_keychain_pass(account="dani@tomlinson.io", server="smtp.fastmail.com")
 remotehost = imap.fastmail.com
 remoteport = 993
-sslcacertfile = /usr/local/etc/openssl/cert.pem
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 realdelete = no
 maxconnections = 5
 folderfilter = lambda folder: folder not in ['Trash', 'Archive']
@@ -35,13 +35,13 @@ remoterepository = hashicorp-remote
 auth_mechanisms = LOGIN
 type = IMAP
 remoteuser = dani@hashicorp.com
-sslcacertfile = /usr/local/etc/openssl/cert.pem
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 remotepasseval = get_keychain_pass(account="dani@hashicorp.com", server="smtp.gmail.com")
 remotehost = imap.gmail.com
 remoteport = 993
 realdelete = no
 maxconnections = 10
-sslcacertfile = /usr/local/etc/openssl/cert.pem
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 folderfilter = lambda folder: folder not in ['Trash']
 
 [Repository hashicorp-local]
