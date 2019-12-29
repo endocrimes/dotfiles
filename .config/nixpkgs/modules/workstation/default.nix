@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
-{
+let unstable = import <unstable> { };
+in {
   imports = [
     ./devel
     ./fonts
@@ -11,13 +12,16 @@
   ];
 
   home.packages = with pkgs; [
+    # Configure Planck
+    unstable.wally-cli
+
     # Photography & Images
     darktable
     inkscape
     gimp
 
     # Fake Gamer Girl
-    steam
+    unstable.steam
 
     # xclip. why.
     xclip
