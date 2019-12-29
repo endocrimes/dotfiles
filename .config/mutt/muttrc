@@ -106,7 +106,7 @@ macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 
 set folder = "~/.mail"
 
-mailboxes +personal/INBOX +hashicorp/INBOX
+mailboxes +personal/INBOX +personal/notifications.github.direct-mention +personal/notifications.github.assignments +personal/notifications.github.other +hashicorp/INBOX
 folder-hook personal/* source ~/.config/mutt/accounts/personal.muttrc
 folder-hook hashicorp/* source ~/.config/mutt/accounts/hashicorp.muttrc
 
@@ -115,6 +115,14 @@ macro index ip "<change-folder>+personal/INBOX<enter>" "Go to personal inbox"
 
 set sig_dashes = no
 set signature = $HOME/.config/mutt/signature
+
+## Sidebar
+set sidebar_visible = yes
+set sidebar_width = 20
+set sidebar_short_path = yes
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cj sidebar-next
+bind index,pager \Co sidebar-open
 
 # requires: https://github.com/keith/contacts-cli
 set query_command="contacts '%s'"
