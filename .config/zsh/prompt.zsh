@@ -32,7 +32,13 @@ function __env_info() {
   fi
 }
 
-local __prompt='[$(__env_info)$(__machine_info)$(__directory_prompt)$(__git_prompt)$(__aws_prompt)] $ '
+function __nix_shell_packages() {
+  if [[ -n $NIX_SHELL_PACKAGES ]]; then
+    echo "%F{cyan}(nxs: $NIX_SHELL_PACKAGES)%f "
+  fi
+}
+
+local __prompt='[$(__nix_shell_packages)$(__env_info)$(__machine_info)$(__directory_prompt)$(__git_prompt)$(__aws_prompt)] $ '
 
 setopt PROMPT_SUBST
 export PS1="$__prompt"

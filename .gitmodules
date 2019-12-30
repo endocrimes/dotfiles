@@ -1,3 +1,6 @@
 [submodule ".vim/autoload"]
 	path = .vim/autoload
 	url = https://github.com/junegunn/vim-plug.git
+[submodule ".config/zsh/plugins/zsh-nix-shell"]
+	path = .config/zsh/plugins/zsh-nix-shell
+	url = https://github.com/chisui/zsh-nix-shell.git
