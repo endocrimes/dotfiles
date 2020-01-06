@@ -9,6 +9,7 @@ in {
     ./terminal
     ./entertainment
     ./wm
+    ./yubikey.nix
   ];
 
   home.packages = with pkgs; [
