@@ -25,7 +25,7 @@
     dtc   = difftool --cached
     detach = !sh -c 'git checkout $(git rev-parse ${1:-HEAD})' --
     l     = log -5 --topo-order --graph --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
-    lb    = !sh -c 'git log -$(git rev-list --count HEAD ^${1:-master}) --topo-order --graph --date=relative --pretty=format:%Cgreen%h%Creset\\ %s%Cred%d%Creset\\ %C\\(yellow\\ bold\\)\\(%an\\)%Creset'
+    lb    = !sh -c 'git log -$(git rev-list --count HEAD ^${1:-master}) --topo-order --graph --date=relative --pretty=format:%Cgreen%h%Creset\\ %s%Cred%d%Creset\\ %C\\(yellow\\ bold\\)\\(%an\\)%Creset' $@
     last  = diff HEAD^ HEAD
     lastk = difftool --tool=Kaleidoscope HEAD^ HEAD
     pul   = pull
