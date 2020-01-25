@@ -37,7 +37,7 @@
         geometry = "600x50-25+40";
         indicate_hidden = true;
         shrink = false;
-        transparency = 0;
+        transparency = 5;
         notification_height = 0;
         seperator_height = 2;
         padding = 10;
@@ -50,9 +50,7 @@
 
         font = "Roboto 10";
         line_height = 5;
-        format = ''
-          <b>%s</b>
-          %b'';
+        format = "<b>%s</b>\n%b";
         markup = "full";
         plain_text = false;
 
@@ -85,5 +83,11 @@
         frame_color = "#bf616a";
       };
     };
+  };
+
+  services.compton = {
+    enable = true;
+    menuOpacity = "0.95";
+    blur = true;
   };
 }
