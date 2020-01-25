@@ -86,7 +86,7 @@
   };
 
   services.compton = {
-    enable = true;
+    enable = false; # using 30% cpu on thinkpad. Disabling for now.
     menuOpacity = "0.95";
     blur = true;
   };
