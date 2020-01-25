@@ -4,12 +4,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [
-    unzip
-    lsof
-    zsh
-    lm_sensors
-  ];
+  home.packages = with pkgs; [ unzip lsof zsh lm_sensors ];
 
   services.gpg-agent = {
     enable = true;

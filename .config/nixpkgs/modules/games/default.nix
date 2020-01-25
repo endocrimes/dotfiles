@@ -1,7 +1,5 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./light
-  ];
+  imports = [ ./light ];
 }

@@ -3,7 +3,5 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    openttd
-  ];
+  home.packages = with pkgs; [ openttd ];
 }

@@ -1,14 +1,15 @@
 { stdenv, config, pkgs, ... }:
 
-let unstable = import <unstable> { };
-    endopkgs = import <endopkgs> { };
+let
+  unstable = import <unstable> { };
+  endopkgs = import <endopkgs> { };
 in {
   imports = [
-   ./modules/base
-   ./modules/workstation
-   ./modules/workworkwork
-   ./modules/email
-   ./modules/games/light
+    ./modules/base
+    ./modules/workstation
+    ./modules/workworkwork
+    ./modules/email
+    ./modules/games/light
   ];
 
   programs.firefox = {
@@ -33,14 +34,10 @@ in {
 
   systemd.user.startServices = true;
 
-  services.syncthing = {
-    enable = true;
-  };
+  services.syncthing = { enable = true; };
 
   services.keybase.enable = true;
 
-  services.kbfs = {
-    enable = true;
-  };
+  services.kbfs = { enable = true; };
 }
 
