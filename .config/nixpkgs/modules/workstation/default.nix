@@ -2,15 +2,8 @@
 
 let unstable = import <unstable> { };
 in {
-  imports = [
-    ./devel
-    ./fonts
-    ./chat
-    ./terminal
-    ./entertainment
-    ./wm
-    ./yubikey.nix
-  ];
+  imports =
+    [ ./devel ./fonts ./chat ./terminal ./entertainment ./wm ./yubikey.nix ];
 
   home.packages = with pkgs; [
     # Configure Planck

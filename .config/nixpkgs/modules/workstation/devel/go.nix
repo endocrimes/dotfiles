@@ -5,6 +5,7 @@ in {
   home.packages = with pkgs; [
     gnumake
     unstable.gotestsum
+    unstable.jetbrains.goland
   ];
 
   programs.go = {

@@ -1,7 +1,8 @@
 { pkgs, lib, ... }:
 
-let unstable = import <unstable> { };
-    endopkgs = import <endopkgs> { };
+let
+  unstable = import <unstable> { };
+  endopkgs = import <endopkgs> { };
 in {
   home.packages = with pkgs; [
     awscli
