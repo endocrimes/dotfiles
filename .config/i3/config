@@ -157,5 +157,13 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-default_border pixel 2
-client.focused #4c7899 #285577 #ffffff #F73E5F #666666
+smart_gaps on
+gaps inner 4
+gaps outer 4
+gaps horizontal 4
+gaps outer 4
+
+smart_borders on
+for_window [class=".*"] border pixel 1
+client.focused #AAAAAA #285577 #ffffff #F73E5F #AAAAAA
+client.unfocused #673ab7 #285577 #ffffff #F73E5F #673ab7
