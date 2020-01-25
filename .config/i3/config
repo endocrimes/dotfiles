@@ -165,5 +165,7 @@ gaps outer 4
 
 smart_borders on
 for_window [class=".*"] border pixel 1
+for_window [class=Pavucontrol] border pixel 6
 client.focused #AAAAAA #285577 #ffffff #F73E5F #AAAAAA
 client.unfocused #673ab7 #285577 #ffffff #F73E5F #673ab7
+for_window [class=Pavucontrol] floating enable
