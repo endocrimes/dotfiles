@@ -33,8 +33,14 @@ function __env_info() {
 }
 
 function __nix_shell_packages() {
+  if [[ -n $IN_NIX_SHELL ]]; then
+    echo -n "%F{cyan}(nxs"
+  fi
   if [[ -n $NIX_SHELL_PACKAGES ]]; then
-    echo "%F{cyan}(nxs: $NIX_SHELL_PACKAGES)%f "
+    echo -n ": $NIX_SHELL_PACKAGES"
+  fi
+  if [[ -n $IN_NIX_SHELL ]]; then
+    echo ")%f "
   fi
 }
 
@@ -42,3 +48,4 @@ local __prompt='[$(__nix_shell_packages)$(__env_info)$(__machine_info)$(__direct
 
 setopt PROMPT_SUBST
 export PS1="$__prompt"
+export RPROMPT=""

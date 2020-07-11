@@ -83,3 +83,6 @@ export PONY_KEYID="2DF3678C4B34C887"
 # with remote servers too.
 bindkey -e
 
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /home/danielle/dev/bin/nomad nomad
