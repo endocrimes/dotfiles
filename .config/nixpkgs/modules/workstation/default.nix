@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 let unstable = import <unstable> { };
+    endopkgs = import <endopkgs> { };
 in {
   imports =
     [ ./devel ./fonts ./chat ./terminal ./entertainment ./wm ./yubikey.nix ];
@@ -17,7 +18,16 @@ in {
     # Fake Gamer Girl
     unstable.steam
 
+    # The libre-est of boring.
+    libreoffice
+
+    # Screen recording
+    kazam
+
     # xclip. why.
     xclip
+
+    # Elgato Key Lights
+    endopkgs.keylightctl
   ];
 }

@@ -14,6 +14,7 @@ in {
 
   programs.firefox = {
     enable = true;
+    package = unstable.firefox-unwrapped;
   };
 
   home.packages = with pkgs; [

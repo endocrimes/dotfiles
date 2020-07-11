@@ -7,6 +7,6 @@ in {
   home.packages = with pkgs; [
     awscli
     unstable.google-cloud-sdk
-    endopkgs.hclfmt
+#    endopkgs.hclfmt
   ];
 }
