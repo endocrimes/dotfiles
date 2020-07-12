@@ -24,6 +24,7 @@
     enable = true;
 
     headerMargin = false;
+    colorScheme = 6;
     meters = {
       left = [ "LeftCPUs2" "Blank" "Memory" "Swap" "Hostname" ];
       right = [ "RightCPUs2" "Blank" "Tasks" "LoadAverage" "Uptime" ];
