@@ -5,6 +5,7 @@
 
   home.packages = with pkgs; [
     gnumake
+    gcc
     gitAndTools.hub
     nixfmt
     pre-commit
