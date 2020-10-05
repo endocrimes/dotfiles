@@ -29,5 +29,8 @@ in {
 
     # Elgato Key Lights
     endopkgs.keylightctl
+
+    # Useful for checking that my webcam works
+    gnome3.cheese
   ];
 }
