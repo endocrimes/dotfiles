@@ -14,7 +14,6 @@ in {
 
   programs.firefox = {
     enable = true;
-    package = unstable.firefox-unwrapped;
   };
 
   home.packages = with pkgs; [
@@ -30,6 +29,9 @@ in {
     syncthing
 
     keybase-gui
+
+    # AIO Controller
+    endopkgs.liquidctl
   ];
 
   systemd.user.startServices = true;
