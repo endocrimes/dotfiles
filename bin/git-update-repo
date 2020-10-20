@@ -3,6 +3,8 @@
 # Updates the current git repo by changing to the root branch, pulling the
 # latest changes, and then removes merged branches.
 
+set -o xtrace
+
 remote=${1:-"origin"} # default remote is origin
 
 branch=${2:-"master"} # default root branch is master
