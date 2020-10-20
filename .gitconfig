@@ -63,3 +63,5 @@
     file = ~/.config/git/mailmap
 [log]
 	  mailmap = true
+[pull]
+	rebase = true
