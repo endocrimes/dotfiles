@@ -1,3 +1,3 @@
 { config, pkgs, ... }:
 
-{ home.packages = [ kitty ]; }
+{ home.packages = [ pkgs.kitty ]; }
