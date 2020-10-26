@@ -1,14 +1,13 @@
 { config, pkgs, ... }:
 
-let unstable = import <unstable> { };
-    endopkgs = import <endopkgs> { };
+let endopkgs = import <endopkgs> { };
 in {
   imports =
     [ ./devel ./fonts ./chat ./terminal ./entertainment ./wm ./yubikey.nix ];
 
   home.packages = with pkgs; [
     # Configure Planck
-    unstable.wally-cli
+    wally-cli
 
     # Photography & Images
     darktable
@@ -16,7 +15,7 @@ in {
     gimp
 
     # Fake Gamer Girl
-    unstable.steam
+    steam
 
     # The libre-est of boring.
     libreoffice

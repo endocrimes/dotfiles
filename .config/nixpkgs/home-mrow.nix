@@ -1,7 +1,6 @@
 { stdenv, config, pkgs, ... }:
 
 let
-  unstable = import <unstable> { };
   endopkgs = import <endopkgs> { };
 in {
   imports = [ ./modules/base ];

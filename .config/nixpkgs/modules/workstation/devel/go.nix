@@ -1,16 +1,14 @@
 { pkgs, lib, ... }:
 
-let unstable = import <unstable> { };
-in {
+{
   home.packages = with pkgs; [
     gnumake
-    unstable.gotestsum
-    unstable.jetbrains.goland
+    gotestsum
   ];
 
   programs.go = {
     enable = true;
-    package = unstable.go;
+    package = pkgs.go;
     goPath = lib.mkDefault "dev";
   };
 }

@@ -1,0 +1,1 @@
+/home/danielle/.config/nixpkgs/home-mir.nix
