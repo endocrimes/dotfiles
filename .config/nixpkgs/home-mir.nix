@@ -6,6 +6,7 @@ in {
   imports = [
     ./modules/base
     ./modules/workstation
+    ./modules/graphical/i3
     ./modules/workworkwork
     ./modules/email
     ./modules/games/light

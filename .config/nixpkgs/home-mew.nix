@@ -5,10 +5,8 @@ let
 in {
   imports = [
     ./modules/base
-    ./modules/workstation
     ./modules/workworkwork
-    ./modules/email
-    ./modules/games/light
+    ./modules/workstation
   ];
 
   programs.firefox = {

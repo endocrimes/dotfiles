@@ -3,7 +3,7 @@
 let endopkgs = import <endopkgs> { };
 in {
   imports =
-    [ ./devel ./fonts ./chat ./terminal ./entertainment ./wm ./yubikey.nix ];
+    [ ./devel ./fonts ./chat ./terminal ./entertainment ./yubikey.nix ];
 
   home.packages = with pkgs; [
     # Configure Planck
