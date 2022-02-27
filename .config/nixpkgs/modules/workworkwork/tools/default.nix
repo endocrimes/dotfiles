@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     packer
-    p4
+#    p4
   ];
 }
 
