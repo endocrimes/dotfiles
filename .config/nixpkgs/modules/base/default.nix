@@ -4,7 +4,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [ unzip lsof zsh lm_sensors ];
+  home.packages = with pkgs; [ unzip lsof zsh lm_sensors htop ];
 
   services.gpg-agent = {
     enable = true;
@@ -18,16 +18,5 @@
     maxCacheTtlSsh = 7200;
 
     enableSshSupport = true;
-  };
-
-  programs.htop = {
-    enable = true;
-
-    headerMargin = false;
-    colorScheme = 6;
-    meters = {
-      left = [ "LeftCPUs2" "Blank" "Memory" "Swap" "Hostname" ];
-      right = [ "RightCPUs2" "Blank" "Tasks" "LoadAverage" "Uptime" ];
-    };
   };
 }
