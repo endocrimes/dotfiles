@@ -6,51 +6,40 @@ name="work"
 
 # Cleanup
 tmux kill-session -t $name
-pkill -9 nomad
-pkill -9 consul
-pkill -9 vault
 
 tmux -2 new-session -d -s $name
 
 sleep 1
 
 # Window 1; Development
-tmux rename-window -t $name:1 'dev'
-tmux send-keys -R -t $name:1 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+tmux rename-window -t $name:1 'k8s-dev'
+tmux send-keys -R -t $name:1 "cd $GOPATH/src/k8s.io/kubernetes" C-m
 tmux send-keys -R -t $name:1 "vim" C-m
-tmux split-window -v -p 10
-tmux send-keys -R -t $name:1 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+tmux split-window -v -p 25
+tmux send-keys -R -t $name:1 "cd $GOPATH/src/k8s.io/kubernetes" C-m
 tmux send-keys -R -t $name:1 "clear" C-m
+tmux send-keys -R -t $name:1 "git status" C-m
 
 # Window 2; Testing
-tmux new-window -t $name:2 -n 'test'
-tmux send-keys -R -t $name:2 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+tmux new-window -t $name:2 -n 'k8s-test'
+tmux send-keys -R -t $name:2 "cd $GOPATH/src/k8s.io/kubernetes" C-m
 tmux send-keys -R -t $name:2 "clear" C-m
-tmux split-window -h
-tmux send-keys -R -t $name:2 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
-tmux send-keys -R -t $name:2 "clear" C-m
-tmux send-keys -R -t $name:2 "nomad agent -dev" C-m
-tmux split-window -v
-tmux send-keys -R -t $name:2 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
-tmux send-keys -R -t $name:2 "clear" C-m
-tmux send-keys -R -t $name:2 "nomad status" C-m
+tmux send-keys -R -t $name:2 "make check WHAT=pkg/kubelet" C-m
 
-# Window 3; Consul/Vault Daemons
-tmux new-window -t $name:3 -n 'daemons'
-tmux send-keys -R -t $name:3 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
+# Window 3; test-infra
+tmux new-window -t $name:3 -n 'test-infra'
+tmux send-keys -R -t $name:3 "cd $GOPATH/src/k8s.io/test-infra" C-m
 tmux send-keys -R -t $name:3 "clear" C-m
-tmux split-window -h
-tmux send-keys -R -t $name:3 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
-tmux send-keys -R -t $name:3 "vault server -dev" C-m
-tmux split-window -v
-tmux send-keys -R -t $name:3 "cd $GOPATH/src/github.com/hashicorp/nomad" C-m
-tmux send-keys -R -t $name:3 "consul agent -dev" C-m
+tmux send-keys -R -t $name:3 "vim" C-m
+tmux split-window -v -p 25
+tmux send-keys -R -t $name:3 "cd $GOPATH/src/k8s.io/test-infra" C-m
+tmux send-keys -R -t $name:3 "clear" C-m
+tmux send-keys -R -t $name:3 "git status" C-m
 
-# Window 4; Email, refresh all (O)
-tmux new-window -t $name:4 -n 'mutt'
-tmux send-keys -R -t $name:4 "mutt" C-m
-tmux send-keys -R -t $name:4 "O"
-tmux send-keys -R -t $name:4 Enter
+# Window 4; scratch
+tmux new-window -t $name:4 -n 'scratch'
+tmux send-keys -R -t $name:4 "cd $GOPATH/src/k8s.io/kubernetes" C-m
+tmux send-keys -R -t $name:4 "clear" C-m
 
 # Set default window
 tmux select-window -t "$name:1"
