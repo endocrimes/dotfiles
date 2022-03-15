@@ -127,7 +127,7 @@ augroup numberwang
 augroup END
 
 if has("gui_running")
-  set guifont=Fira\ Code\ Retina:h14
+  set guifont=Fira\ Code:14
 else
   " disable Background Color Erase (BCE) so that color schemes
     " render properly when inside 256-color tmux and GNU screen.
