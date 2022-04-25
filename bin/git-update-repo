@@ -7,7 +7,7 @@ set -o xtrace
 
 remote=${1:-"origin"} # default remote is origin
 
-branch=${2:-"master"} # default root branch is master
+branch=${2:-"$(git default-branch)"}
 
 # Switch to branch
 git checkout "${branch}"
