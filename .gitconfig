@@ -43,6 +43,7 @@
     undo  = reset --soft HEAD^
     fixup = commit --amend --no-edit
     current = rev-parse --abbrev-ref HEAD
+    default-branch = "!git branch --sort=-refname | grep -o -m1 '\\b\\(main\\|master\\|dev\\)\\b'"
 [difftool "Kaleidoscope"]
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
@@ -58,10 +59,12 @@
 [push]
     default = simple
 [commit]
-    gpgsign = true
+    gpgsign = false
 [mailmap]
     file = ~/.config/git/mailmap
 [log]
 	  mailmap = true
 [pull]
 	rebase = true
+[init]
+  defaultBranch = main
