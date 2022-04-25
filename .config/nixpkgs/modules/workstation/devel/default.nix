@@ -9,6 +9,7 @@
     gitAndTools.hub
     nixfmt
     pre-commit
+    github-cli
 
     vim_configurable # Config for clipboard support
 
