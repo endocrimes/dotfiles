@@ -10,11 +10,8 @@
 
   home.packages = with pkgs; [
     gnupg
-    syncthing
     ripgrep
   ];
 
   systemd.user.startServices = true;
-
-  services.syncthing = { enable = true; };
 }
