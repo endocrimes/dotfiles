@@ -1,7 +1,7 @@
 { stdenv, config, pkgs, ... }:
 
 {
-  imports = [ ./modules/base ];
+  imports = [ ./modules/base ./modules/develop ];
 
   home.packages = with pkgs; [ syncthing ];
 

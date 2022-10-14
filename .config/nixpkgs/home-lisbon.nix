@@ -3,9 +3,7 @@
 {
   imports = [
     ./modules/base
-    ./modules/workstation/devel
-    ./modules/workworkwork/devel
-    ./modules/workworkwork/tools
+    ./modules/develop
   ];
 
   home.packages = with pkgs; [

@@ -7,6 +7,7 @@ in {
     ./modules/base
     ./modules/workworkwork
     ./modules/workstation
+    ./modules/develop
   ];
 
   programs.firefox = {

@@ -5,5 +5,5 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./devel ./chat ./tools ];
+  imports = [ ./chat ];
 }
