@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#
+# Expects `op`, `jq`, and `aws` to be installed.
+# Expects that a single credential will be returned for the selected `op` account
+#  for the provided AWS_CREDENTIAL_TAGS.
+# The returned credential should have fields with AWSAccessKeyID/AWSSecretAccessKey labels.
+# The returned credential must support MFA.
+
+AWS_CREDENTIAL_TAGS="${AWS_CREDENTIAL_TAGS:-"AWS,Personal"}"
+
+credentialID="$(op item list --tags $AWS_CREDENTIAL_TAGS --format json | jq -r ".[0].id")"
+accessKeyID="$(op item get "$credentialID" --fields label=AWSAccessKeyID)"
+secretKey="$(op item get "$credentialID" --fields label=AWSSecretAccessKey)"
+
+export AWS_ACCESS_KEY_ID="$accessKeyID"
+export AWS_SECRET_ACCESS_KEY="$secretKey"
+
+serialNumber="$(aws --output=json iam list-mfa-devices | jq -r '.MFADevices[0].SerialNumber')"
+
+# Fetch the otp code after the serial number to reduce raciness
+otp="$(op item get "$credentialID" --otp)"
+
+creds=$(aws --output=json sts get-session-token --serial-number "$serialNumber" --token-code "$otp")
+
+AWS_ACCESS_KEY_ID="$(echo "$creds" | jq -r .Credentials.AccessKeyId)"
+AWS_SECRET_ACCESS_KEY="$(echo "$creds" | jq -r .Credentials.SecretAccessKey)"
+AWS_SESSION_TOKEN="$(echo "$creds" | jq -r .Credentials.SessionToken)"
+
+export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
