@@ -17,6 +17,7 @@
     google-cloud-sdk
 
     vim_configurable # Config for clipboard support
+    shellcheck
 
     # Random dev utils
     jq
