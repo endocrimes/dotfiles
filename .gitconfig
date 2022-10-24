@@ -1,70 +1,70 @@
 [user]
-    name = Danielle Lancashire
-    email = dani@builds.terrible.systems
-    signingkey = F3DDF91B
+  name = Danielle Lancashire
+  email = dani@builds.terrible.systems
+  signingkey = F3DDF91B
 [core]
-    excludesfile = ~/.config/git/gitignore
+  excludesfile = ~/.config/git/gitignore
 [mergetool]
-    keepBackup = false
-    prompt = false
+  keepBackup = false
+  prompt = false
 [alias]
-    a     = add
-    adeleted = !sh -c 'git rm `git ls-files --deleted`'
-    ap    = add -p
-    auntracked = !sh -c 'git add `git ls-files --others --exclude-standard`'
-    ba    = branch -a
-    c     = clone --recursive
-    cb    = !sh -c 'git checkout -b $1 && git push -u origin $1' -
-    co    = checkout
-    com   = commit --verbose
-    cop   = !sh -c 'git branch | cut -c 3- | selecta 2>/dev/null | xargs git checkout'
-    ctags = !.git/hooks/ctags
-    d     = diff --ignore-submodules
-    dc    = diff --cached
-    dt    = difftool
-    dtc   = difftool --cached
-    detach = !sh -c 'git checkout $(git rev-parse ${1:-HEAD})' --
-    l     = log -5 --topo-order --graph --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
-    lb    = !sh -c 'git log -$(git rev-list --count HEAD ^${1:-master}) --topo-order --graph --date=relative --pretty=format:%Cgreen%h%Creset\\ %s%Cred%d%Creset\\ %C\\(yellow\\ bold\\)\\(%an\\)%Creset' $@
-    last  = diff HEAD^ HEAD
-    lastk = difftool --tool=Kaleidoscope HEAD^ HEAD
-    pul   = pull
-    punch = push --force-with-lease
-    pummel = push --force
-    r     = reflog -5
-    ra    = rebase --abort
-    rc    = rebase --continue
-    rma   = rebase master
-    rmi   = rebase master -i
-    rv    = remote -v
-    s     = status -b --porcelain
-    sub   = submodule update --init --recursive
-    subu  = submodule foreach git pull origin master
-    undo  = reset --soft HEAD^
-    fixup = commit --amend --no-edit
-    current = rev-parse --abbrev-ref HEAD
-    default-branch = "!git branch --sort=-refname | grep -o -m1 '\\b\\(main\\|master\\|dev\\)\\b'"
+  a     = add
+  adeleted = !sh -c 'git rm `git ls-files --deleted`'
+  ap    = add -p
+  auntracked = !sh -c 'git add `git ls-files --others --exclude-standard`'
+  ba    = branch -a
+  c     = clone --recursive
+  cb    = !sh -c 'git checkout -b $1 && git push -u origin $1' -
+  co    = checkout
+  com   = commit --verbose
+  cop   = !sh -c 'git branch | cut -c 3- | selecta 2>/dev/null | xargs git checkout'
+  ctags = !.git/hooks/ctags
+  d     = diff --ignore-submodules
+  dc    = diff --cached
+  dt    = difftool
+  dtc   = difftool --cached
+  detach = !sh -c 'git checkout $(git rev-parse ${1:-HEAD})' --
+  l     = log -5 --topo-order --graph --pretty='format:%Cgreen%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
+  lb    = !sh -c 'git log -$(git rev-list --count HEAD ^${1:-master}) --topo-order --graph --date=relative --pretty=format:%Cgreen%h%Creset\\ %s%Cred%d%Creset\\ %C\\(yellow\\ bold\\)\\(%an\\)%Creset' $@
+  last  = diff HEAD^ HEAD
+  lastk = difftool --tool=Kaleidoscope HEAD^ HEAD
+  pul   = pull
+  punch = push --force-with-lease
+  pummel = push --force
+  r     = reflog -5
+  ra    = rebase --abort
+  rc    = rebase --continue
+  rma   = rebase master
+  rmi   = rebase master -i
+  rv    = remote -v
+  s     = status -b --porcelain
+  sub   = submodule update --init --recursive
+  subu  = submodule foreach git pull origin master
+  undo  = reset --soft HEAD^
+  fixup = commit --amend --no-edit
+  current = rev-parse --abbrev-ref HEAD
+  default-branch = "!git branch --sort=-refname | grep -o -m1 '\\b\\(main\\|master\\|dev\\)\\b'"
 [difftool "Kaleidoscope"]
-    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
-    cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-    trustExitCode = true
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
 [fetch]
-    prune = false
+  prune = false
 [branch]
-    autosetupmerge = true
-    sort=-committerdate # Sort branches by last commit date, descending.
+  autosetupmerge = true
+  sort=-committerdate # Sort branches by last commit date, descending.
 [rerere]
-    enabled = true
+  enabled = true
 [push]
-    default = simple
+  default = simple
 [commit]
-    gpgsign = false
+  gpgsign = false
 [mailmap]
-    file = ~/.config/git/mailmap
+  file = ~/.config/git/mailmap
 [log]
-	  mailmap = true
+  mailmap = true
 [pull]
-	rebase = true
+  rebase = true
 [init]
   defaultBranch = main

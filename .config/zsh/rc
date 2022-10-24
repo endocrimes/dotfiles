@@ -14,10 +14,6 @@ if [ -f $ZSH_CONFIG_ROOT/history.zsh ]; then
   source $ZSH_CONFIG_ROOT/history.zsh
 fi
 
-if [ -f $HOME/.zsh.private ]; then
-  source $HOME/.zsh.private
-fi
-
 if [ -f $ZSH_CONFIG_ROOT/plugins/zsh-nix-shell/nix-shell.plugin.zsh ]; then
   source $ZSH_CONFIG_ROOT/plugins/zsh-nix-shell/nix-shell.plugin.zsh
 fi
@@ -31,6 +27,12 @@ plugins=(git ssh-agent)
 
 if [ -f $ZSH_CONFIG_ROOT/prompt.zsh ]; then
   source $ZSH_CONFIG_ROOT/prompt.zsh
+fi
+
+# defaults
+
+if [ -z $GOPATH ]; then
+  export GOPATH="$HOME/dev"
 fi
 
 # Command Alias
@@ -60,21 +62,19 @@ elif [[ $OSX = 1 ]]; then
   fi
 fi
 
-## Swiftenv
+if type /opt/homebrew/bin/brew &>/dev/null; then
+  eval $(/opt/homebrew/bin/brew shellenv)
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
-if [ -x "$(command -v swiftenv)" ]; then
-  export SWIFTENV_ROOT="$HOME/.swiftenv"
-  export PATH="$SWIFTENV_ROOT/bin:$PATH"
-  eval "$(swiftenv init -)"
+  autoload -Uz compinit
+  compinit
 fi
 
 ## ~/bin ~/.local/bin $GOPATH/bin
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
-
-export PONY_KEYID="2DF3678C4B34C887"
-
+export PATH="$PATH:$HOME/.cargo/bin"
 
 ## Fix keybindings
 # zsh introspects the EDITOR env var and automatically enables vi-bindings if
@@ -85,4 +85,12 @@ bindkey -e
 
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /home/danielle/dev/bin/nomad nomad
+
+if [ -f $GOPATH/bin/nomad ]; then
+  complete -o nospace -C /home/danielle/dev/bin/nomad nomad
+fi
+
+if [ -f $HOME/.zsh.private ]; then
+  source $HOME/.zsh.private
+fi
+
