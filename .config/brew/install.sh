@@ -10,7 +10,7 @@ function install_brew() {
 }
 
 function install_cask() {
-	brew cask install "$1";
+	brew install --cask "$1";
 }
 
 install_brew zsh;
