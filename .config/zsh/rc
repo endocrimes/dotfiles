@@ -73,8 +73,8 @@ fi
 ## ~/bin ~/.local/bin $GOPATH/bin
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$GOPATH/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 ## Fix keybindings
 # zsh introspects the EDITOR env var and automatically enables vi-bindings if

@@ -245,24 +245,24 @@ endif
 " endif
 
 " Rust: rustup component add rls-preview rust-analysis rust-src
-if executable('rls')
+if executable('rustup')
   augroup LspRust
     au!
     autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'rls',
-          \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
-          \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'Cargo.toml'))},
+          \ 'name': 'rust-analyzer',
+          \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rust-analyzer']},
+          \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'Cargo.toml'))},
           \ 'whitelist': ['rust'],
           \ })
     autocmd FileType rust setlocal omnifunc=lsp#complete
   augroup END
 endif
 
-if executable('OmniSharp')
+"if executable('OmniSharp')
    augroup LspCsharp
      au!
      let g:OmniSharp_server_use_net6 = 1
-     let g:OmniSharp_server_path = exepath("OmniSharp")
+"     let g:OmniSharp_server_path = exepath("OmniSharp")
 
      autocmd FileType cs nmap K <Plug>(OmniSharpPreviewDefinition)
 
@@ -284,7 +284,7 @@ if executable('OmniSharp')
      autocmd FileType cs nmap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
      autocmd FileType cs imap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
    augroup END
-endif
+"endif
 
 "" Ruby: gem install solargraph
 if executable('solargraph')

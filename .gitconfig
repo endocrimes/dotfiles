@@ -44,6 +44,7 @@
   fixup = commit --amend --no-edit
   current = rev-parse --abbrev-ref HEAD
   default-branch = "!git branch --sort=-refname | grep -o -m1 '\\b\\(main\\|master\\|dev\\)\\b'"
+  sign-branch = rebase --exec 'git commit --amend --no-edit -n --sign -S' -i origin/main
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
