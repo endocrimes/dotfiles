@@ -68,6 +68,9 @@ defaults write com.apple.dock autohide -bool true
 # Set the icon size of Dock items to 45 points
 defaults write com.apple.dock tilesize -int 45
 
+# Disable automatic rearranging of spaces
+defaults write com.apple.dock mru-spaces -bool false
+
 # Restart the dock for changes to take effect
 killall Dock
 
