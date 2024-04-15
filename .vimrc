@@ -226,6 +226,11 @@ else
   let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 endif
 
+
+let g:ale_linters = {'go': ['errcheck'], 'cs': ['OmniSharp'], 'rust': ['analyzer', 'cargo']}
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+
 "
 " Language Server Protocols
 "
@@ -236,7 +241,7 @@ endif
 "     au!
 "     autocmd User lsp_setup call lsp#register_server({
 "           \ 'name': 'bash-language-server',
-"           \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+"           \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-languagehom-server start']},
 "           \ 'whitelist': ['sh', 'bash'],
 "           \ })
 "     autocmd FileType sh setlocal omnifunc=lsp#complete
@@ -245,17 +250,22 @@ endif
 " endif
 
 " Rust: rustup component add rls-preview rust-analysis rust-src
-if executable('rustup')
-  augroup LspRust
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'rust-analyzer',
-          \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rust-analyzer']},
-          \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'Cargo.toml'))},
-          \ 'whitelist': ['rust'],
-          \ })
-    autocmd FileType rust setlocal omnifunc=lsp#complete
-  augroup END
+if executable('rust-analyzer')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'Rust Language Server',
+        \   'cmd': {server_info->['rust-analyzer']},
+        \   'whitelist': ['rust'],
+        \   'initialization_options': {
+        \     'cargo': {
+        \       'buildScripts': {
+        \         'enable': v:true,
+        \       },
+        \     },
+        \     'procMacro': {
+        \       'enable': v:true,
+        \     },
+        \   },
+        \ })
 endif
 
 let g:OmniSharp_server_use_net6 = 1
@@ -299,6 +309,37 @@ if executable('solargraph')
   augroup END
 endif
 
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> <leader>gd <plug>(lsp-definition)
+    nmap <buffer> <leader>ds :belowright LspDefinition<cr>
+    nmap <buffer> <leader>gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> <leader>gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> <leader>gr <plug>(lsp-references)
+    nmap <buffer> <leader>gi <plug>(lsp-implementation)
+    nmap <buffer> <leader>gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+
+    " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
 "
 " Python
 "
@@ -313,8 +354,6 @@ let g:clojure_align_subforms = 1
 autocmd BufNewFile,BufRead *.cljx setlocal filetype=clojure
 
 autocmd FileType clojure nmap <Leader>t :RunTests<CR>
-
-let g:ale_linters = {'go': ['errcheck'], 'cs': ['OmniSharp']}
 
 "
 " Go
@@ -370,6 +409,9 @@ augroup END
 augroup filetype_rust
   autocmd!
 augroup END
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
 
 let g:autofmt_autosave = 1
 
