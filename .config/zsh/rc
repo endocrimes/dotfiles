@@ -94,3 +94,7 @@ if [ -f $HOME/.zsh.private ]; then
   source $HOME/.zsh.private
 fi
 
+export GPG_TTY="$(tty)"
+
+# Scaleway CLI autocomplete initialization.
+eval "$(scw autocomplete script shell=zsh)"

@@ -60,7 +60,7 @@
 [push]
   default = simple
 [commit]
-  gpgsign = false
+  gpgsign = true
 [mailmap]
   file = ~/.config/git/mailmap
 [log]
@@ -69,3 +69,5 @@
   rebase = true
 [init]
   defaultBranch = main
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
