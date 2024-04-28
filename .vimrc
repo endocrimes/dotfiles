@@ -139,9 +139,9 @@ endif
 
 try
   if has("termguicolors")
-    set termguicolors
-    set background=dark
-    colorscheme fairyfloss
+    silent! set termguicolors
+    silent! set background=dark
+    silent! colorscheme fairyfloss
   else
     set background=dark
     colorscheme solarized
