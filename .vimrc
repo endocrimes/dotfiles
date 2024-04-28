@@ -140,7 +140,10 @@ endif
 if has("termguicolors")
   set termguicolors
   set background=dark
+  try
   colorscheme fairyfloss
+  catch
+  endtry
 else
   set background=dark
   colorscheme solarized
