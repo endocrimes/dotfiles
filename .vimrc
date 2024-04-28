@@ -31,12 +31,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 "" GPG is a necessary evil.
-Plug 'jamessan/vim-gnupg'
+Plug 'jamessan/vim-gnupg', {'branch': 'main'}
 
 "" Git
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter', {'branch': 'main'}
 
 "" Help I accidentally an ops
 Plug 'juliosueiras/vim-terraform-completion', { 'for': 'hcl' }
