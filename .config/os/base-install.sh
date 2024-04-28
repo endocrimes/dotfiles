@@ -11,5 +11,4 @@ apt-get update -y && apt-get install -y \
   git \
   zsh
 
-git submodule update --init --recursive
-vim +PlugInstall +qall
+vim +'PlugInstall --sync' +qall
