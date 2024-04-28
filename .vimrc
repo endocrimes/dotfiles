@@ -40,7 +40,7 @@ Plug 'airblade/vim-gitgutter'
 
 "" Help I accidentally an ops
 Plug 'juliosueiras/vim-terraform-completion', { 'for': 'hcl' }
-Plug 'fatih/vim-hclfmt'
+" Plug 'fatih/vim-hclfmt'
 Plug 'hashivim/vim-hashicorp-tools'
 
 "" Markdown
@@ -64,6 +64,7 @@ Plug 'tpope/vim-rake'
 Plug 'rust-lang/rust.vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'OmniSharp/omnisharp-vim'
+Plug 'keith/swift.vim'
 call plug#end()
 
 set nocompatible " required (to be iMproved)
@@ -145,14 +146,6 @@ else
   colorscheme solarized
   call togglebg#map("<F5>")
 endif
-
-"" Configure Supertab lookup chain
-
-autocmd FileType *
-  \ if &omnifunc != '' |
-  \   call SuperTabChain(&omnifunc, "<c-p>") |
-  \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-  \ endif
 
 "" Save
 nmap <leader>w :w!<cr>
@@ -355,6 +348,7 @@ autocmd BufNewFile,BufRead *.cljx setlocal filetype=clojure
 
 autocmd FileType clojure nmap <Leader>t :RunTests<CR>
 
+let g:ale_linters = {'go': ['errcheck'], 'cs': ['OmniSharp'], 'swift': ['swiftpm', 'swift']}
 "
 " Go
 "
@@ -433,3 +427,12 @@ let g:vim_markdown_fenced_languages = ['go=go', 'viml=vim', 'bash=sh']
 let g:vim_markdown_new_list_item_indent = 2
 au BufRead,BufNewFile *.md setlocal textwidth=80
 au BufRead,BufNewFile *.md* setlocal textwidth=80
+
+"" Configure Supertab lookup chain
+
+autocmd FileType *
+  \ if &omnifunc != '' |
+  \   call SuperTabChain(&omnifunc, "<c-p>") |
+  \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+  \ endif
+

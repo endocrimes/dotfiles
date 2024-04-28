@@ -87,7 +87,7 @@ bindkey -e
 autoload -U +X bashcompinit && bashcompinit
 
 if [ -f $GOPATH/bin/nomad ]; then
-  complete -o nospace -C /home/danielle/dev/bin/nomad nomad
+  complete -o nospace -C $GOPATH/bin/nomad nomad
 fi
 
 if [ -f $HOME/.zsh.private ]; then
@@ -96,5 +96,3 @@ fi
 
 export GPG_TTY="$(tty)"
 
-# Scaleway CLI autocomplete initialization.
-eval "$(scw autocomplete script shell=zsh)"
