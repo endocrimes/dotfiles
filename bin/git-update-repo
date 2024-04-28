@@ -16,4 +16,4 @@ git checkout "${branch}"
 git pull "${remote}"
 
 # Cleanup Old Branches
-git branch --merged | grep -v "\*" | grep -v "${branch}" | grep -v master | grep -v develop | xargs -n 1 git branch -d
+git branch --merged | grep -v "\*" | grep -v "${branch}" | grep -v main |  grep -v master | grep -v develop | xargs -n 1 git branch -d
