@@ -73,7 +73,7 @@ set nocompatible " required (to be iMproved)
 " Settings
 "
 let mapleader=','
-syntax enable                  " Editing without highlighting is sadness
+silent! syntax enable          " Editing without highlighting is sadness
 set ruler                      " Because some people make lists like this
 set noerrorbells               " please don't make noises
 set backspace=indent,eol,start " Makes backspace more useful
