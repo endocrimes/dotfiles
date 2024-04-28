@@ -137,18 +137,18 @@ else
     set t_ut=
 endif
 
-if has("termguicolors")
-  set termguicolors
-  set background=dark
-  try
-  colorscheme fairyfloss
-  catch
-  endtry
-else
-  set background=dark
-  colorscheme solarized
-  call togglebg#map("<F5>")
-endif
+try
+  if has("termguicolors")
+    set termguicolors
+    set background=dark
+    colorscheme fairyfloss
+  else
+    set background=dark
+    colorscheme solarized
+    call togglebg#map("<F5>")
+  endif
+catch
+endtry
 
 "" Save
 nmap <leader>w :w!<cr>
