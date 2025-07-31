@@ -62,8 +62,8 @@ elif [[ $OSX = 1 ]]; then
   fi
 fi
 
-if type /opt/homebrew/bin/brew &>/dev/null; then
-  eval $(/opt/homebrew/bin/brew shellenv)
+if type brew &>/dev/null; then
+  eval $(brew shellenv)
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
   autoload -Uz compinit
@@ -88,6 +88,10 @@ autoload -U +X bashcompinit && bashcompinit
 
 if [ -f $GOPATH/bin/nomad ]; then
   complete -o nospace -C $GOPATH/bin/nomad nomad
+fi
+
+if type atuin &>/dev/null; then
+  eval "$(atuin init zsh --disable-up-arrow)"
 fi
 
 if [ -f $HOME/.zsh.private ]; then

@@ -10,13 +10,15 @@ AWS_CREDENTIAL_TAGS="${AWS_CREDENTIAL_TAGS:-"AWS,Personal"}"
 
 credentialID="$(op item list --tags $AWS_CREDENTIAL_TAGS --format json | jq -r ".[0].id")"
 accessKeyID="$(op item get "$credentialID" --fields label=AWSAccessKeyID)"
-secretKey="$(op item get "$credentialID" --fields label=AWSSecretAccessKey)"
+secretKey="$(op item get "$credentialID" --fields label=AWSSecretAccessKey --reveal)"
 
 export AWS_ACCESS_KEY_ID="$accessKeyID"
 export AWS_SECRET_ACCESS_KEY="$secretKey"
 unset AWS_SESSION_TOKEN
 
 serialNumber="$(aws --output=json iam list-mfa-devices | jq -r '.MFADevices[0].SerialNumber')"
+
+echo "$AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY $serialNumber"
 
 # Fetch the otp code after the serial number to reduce raciness
 otp="$(op item get "$credentialID" --otp)"

@@ -12,7 +12,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 "" Autocomplete
 Plug 'tpope/vim-endwise'
-Plug 'ervandew/supertab'
+Plug 'ervandew/supertab', {'branch': 'main'}
 
 "" Useful tools
 Plug 'tpope/vim-commentary'
@@ -65,6 +65,9 @@ Plug 'rust-lang/rust.vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'keith/swift.vim'
+
+"" Wayland
+Plug 'jasonccox/vim-wayland-clipboard'
 call plug#end()
 
 set nocompatible " required (to be iMproved)
@@ -223,8 +226,10 @@ else
 endif
 
 
-let g:ale_linters = {'go': ['errcheck'], 'cs': ['OmniSharp'], 'rust': ['analyzer', 'cargo']}
+let g:ale_linters = {'go': ['errcheck'], 'cs': ['OmniSharp'], 'rust': ['analyzer', 'cargo'], 'swift': ['swiftpm', 'swift'], 'terraform': ['terraform-lsp', 'tflint']}
+let b:ale_fixers = {'terraform': ['terraform', 'trim_whitespace']}
 let g:ale_fix_on_save = 1
+let g:ale_lint_on_save = 1
 let g:ale_completion_enabled = 1
 
 "
@@ -351,7 +356,6 @@ autocmd BufNewFile,BufRead *.cljx setlocal filetype=clojure
 
 autocmd FileType clojure nmap <Leader>t :RunTests<CR>
 
-let g:ale_linters = {'go': ['errcheck'], 'cs': ['OmniSharp'], 'swift': ['swiftpm', 'swift']}
 "
 " Go
 "
